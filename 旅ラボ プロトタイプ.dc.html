@@ -538,11 +538,17 @@ class Component extends DCLogic {
       return { interests: same ? [] : [...s.selectedFieldIds] };
     });
   }
+  // 旅程アイテムの一意ID(同じ都道府県を複数追加しても個別に扱えるように)
+  newItemUid() { this._itemSeq = (this._itemSeq || 0) + 1; return 'it' + this._itemSeq; }
+  // 同じ都道府県でも何度でも追加OK(重複を弾かない)
   addPlaceToCategory(placeId, categoryId) {
-    this.setState((s) => {
-      if (s.itinerary.some((i) => i.placeId === placeId && i.categoryId === categoryId)) return null;
-      return { itinerary: [...s.itinerary, { placeId, categoryId, day: 1, highlights: [] }] };
-    });
+    this.setState((s) => ({
+      itinerary: [...s.itinerary, { uid: this.newItemUid(), placeId, categoryId, day: 1, highlights: [] }],
+    }));
+  }
+  // uid指定でその1件だけ削除(同じ県の他のコピーは残る)
+  removeItem(uid) {
+    this.setState((s) => ({ itinerary: s.itinerary.filter((i) => i.uid !== uid) }));
   }
   removePlaceFromCategory(placeId, categoryId) {
     this.setState((s) => ({
@@ -581,8 +587,7 @@ class Component extends DCLogic {
       } else {
         catId = categories[0].id;
       }
-      if (s.itinerary.some((i) => i.placeId === placeId && i.categoryId === catId)) return { categories };
-      return { categories, itinerary: [...s.itinerary, { placeId, categoryId: catId, day: 1, highlights: [] }] };
+      return { categories, itinerary: [...s.itinerary, { uid: this.newItemUid(), placeId, categoryId: catId, day: 1, highlights: [] }] };
     });
   }
 
@@ -667,7 +672,7 @@ class Component extends DCLogic {
       this._catSeq = (this._catSeq || 1) + 1;
       const catId = 'plan' + this._catSeq;
       const category = { id: catId, name: sg.title };
-      const items = sg.places.map((p, i) => ({ placeId: p.placeId, categoryId: catId, day: Math.min(i + 1, maxDays), highlights: p.fieldId ? [p.fieldId] : [] }));
+      const items = sg.places.map((p, i) => ({ uid: this.newItemUid(), placeId: p.placeId, categoryId: catId, day: Math.min(i + 1, maxDays), highlights: p.fieldId ? [p.fieldId] : [] }));
       const empty = s.itinerary.length === 0;
       return {
         categories: empty ? [category] : [...s.categories, category],
@@ -837,7 +842,7 @@ class Component extends DCLogic {
           onMoveUp: () => this.moveInCategory(c.id, gi, -1),
           onMoveDown: () => this.moveInCategory(c.id, gi, 1),
           onOpen: () => this.openPlace(r.id, gid),
-          onRemove: () => this.removePlaceFromCategory(item.placeId, c.id),
+          onRemove: () => this.removeItem(item.uid),
           hasHop: !!prev && hop > 0,
           hopLabel: '↓ 移動 約' + hop + '時間',
           hasGenre: !!gf,
@@ -921,17 +926,15 @@ class Component extends DCLogic {
 
     const placeCategoryChips = activeRegion
       ? s.categories.map((c) => {
-          const added = s.itinerary.some((i) => i.placeId === activeRegion.id && i.categoryId === c.id);
+          const count = s.itinerary.filter((i) => i.placeId === activeRegion.id && i.categoryId === c.id).length;
           return {
             id: c.id,
-            name: c.name,
-            mark: added ? '✓ ' : '＋ ',
-            chipBg: added ? '#6B8E4E' : '#fff',
-            chipColor: added ? '#fff' : '#3A3327',
-            chipBorder: added ? '#6B8E4E' : 'rgba(60,50,30,0.22)',
-            onToggle: added
-              ? () => this.removePlaceFromCategory(activeRegion.id, c.id)
-              : () => this.addPlaceToCategory(activeRegion.id, c.id),
+            name: count > 0 ? c.name + '（' + count + '）' : c.name,
+            mark: '＋ ',
+            chipBg: count > 0 ? '#EEF3E3' : '#fff',
+            chipColor: '#3A3327',
+            chipBorder: count > 0 ? '#6B8E4E' : 'rgba(60,50,30,0.22)',
+            onToggle: () => this.addPlaceToCategory(activeRegion.id, c.id),
           };
         })
       : [];
