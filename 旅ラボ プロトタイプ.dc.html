@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <script src="./support.js"></script>
 </head>
 <body>
@@ -16,20 +16,45 @@
   body { background: #F5EFE6; }
   * { box-sizing: border-box; }
   ::-webkit-scrollbar { display: none; }
+
+  /* ===== 実機(スマホ幅)では、デザイン確認用の枠・見せ場を外してアプリを全画面表示 ===== */
+  @media (max-width: 700px) {
+    .chrome-desktop { display: none !important; }
+    .showcase-root {
+      padding: 0 !important; gap: 0 !important;
+      min-height: 100svh !important; height: 100svh !important;
+      display: block !important; overflow: hidden !important;
+    }
+    .device-mount { width: 100vw !important; height: 100svh !important; z-index: 1 !important; }
+    /* iOSモックの外枠を全画面・角丸/影なしに */
+    [data-om-starter="ios-frame"] {
+      width: 100vw !important; height: 100svh !important;
+      border-radius: 0 !important; box-shadow: none !important;
+    }
+    /* モックの装飾(ダイナミックアイランド/ステータスバー/ホームインジケータ)を非表示 */
+    [data-om-starter="ios-frame"] > div:nth-child(1),
+    [data-om-starter="ios-frame"] > div:nth-child(2),
+    [data-om-starter="ios-frame"] > div:nth-child(4) { display: none !important; }
+    /* 実機のノッチ/ホームバーぶんの余白を確保 */
+    [data-om-starter="ios-frame"] > div:nth-child(3) {
+      padding-top: env(safe-area-inset-top, 0px) !important;
+      padding-bottom: env(safe-area-inset-bottom, 0px) !important;
+    }
+  }
 </style>
 </helmet>
 
-<div style="min-height:100vh; background:#F5EFE6; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:22px; padding:48px 24px; position:relative; overflow:hidden; font-family:'Zen Maru Gothic',sans-serif;">
-  <div style="position:absolute; top:60px; left:8%; width:120px; height:100px; background:#CFE0B8; border-radius:58% 42% 63% 37% / 41% 52% 48% 59%; transform:rotate(-9deg); opacity:0.7;"></div>
-  <div style="position:absolute; bottom:80px; right:10%; width:140px; height:110px; background:#F3C97E; border-radius:42% 58% 39% 61% / 55% 44% 56% 45%; transform:rotate(12deg); opacity:0.6;"></div>
-  <div style="position:absolute; top:40%; right:4%; width:90px; height:90px; background:#E9C2B8; border-radius:50%; opacity:0.55;"></div>
+<div class="showcase-root" style="min-height:100vh; background:#F5EFE6; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:22px; padding:48px 24px; position:relative; overflow:hidden; font-family:'Zen Maru Gothic',sans-serif;">
+  <div class="chrome-desktop" style="position:absolute; top:60px; left:8%; width:120px; height:100px; background:#CFE0B8; border-radius:58% 42% 63% 37% / 41% 52% 48% 59%; transform:rotate(-9deg); opacity:0.7;"></div>
+  <div class="chrome-desktop" style="position:absolute; bottom:80px; right:10%; width:140px; height:110px; background:#F3C97E; border-radius:42% 58% 39% 61% / 55% 44% 56% 45%; transform:rotate(12deg); opacity:0.6;"></div>
+  <div class="chrome-desktop" style="position:absolute; top:40%; right:4%; width:90px; height:90px; background:#E9C2B8; border-radius:50%; opacity:0.55;"></div>
 
-  <div style="text-align:center; position:relative; z-index:1;">
+  <div class="chrome-desktop" style="text-align:center; position:relative; z-index:1;">
     <p style="font-family:'Yomogi',sans-serif; font-size:34px; color:#C85C3C; margin:0;">旅ラボ</p>
     <p style="font-size:13px; color:#8A8068; margin:4px 0 0; letter-spacing:0.04em;">学問でめぐる、日本の旅。— プロトタイプ</p>
   </div>
 
-  <x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" hint-size="402,874" style="position:relative; z-index:1;">
+  <x-import class="device-mount" component-from-global-scope="IOSDevice" from="./ios-frame.jsx" hint-size="402,874" style="position:relative; z-index:1;">
     <div style="height:100%; width:100%; display:flex; flex-direction:column; background:#F5EFE6; position:relative; overflow:hidden;">
 
       <div id="appScroll" style="flex:1; overflow:auto;">
