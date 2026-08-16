@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Yomogi&family=Zen+Maru+Gothic:wght@400;500;700;900&family=Zen+Kaku+Gothic+New:wght@700;900&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style id="__om-edit-overrides"></style>
+<style>
+  html { font-size: 16px; }
+  body { margin: 0; background: #F5EFE6; }
+  h1, h2, h3 { text-wrap: balance; }
+  p, li { text-wrap: pretty; }
+  .crayon { font-family: 'Yomogi', 'Zen Maru Gothic', sans-serif; }
+  .tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 12px;
+    letter-spacing: 0.04em; text-transform: uppercase;
+    padding: 4px 12px; border-radius: 999px;
+  }
+  .dotted-div { border: none; border-top: 3px dotted rgba(107,142,78,0.35); margin: 40px 0; }
+  .field-card { break-inside: avoid; }
+  .compare-table { border-collapse: collapse; width: 100%; }
+  .compare-table th, .compare-table td { border: 1px solid rgba(60,50,30,0.14); padding: 12px 14px; text-align: left; vertical-align: top; font-size: 14px; line-height: 1.6; }
+  .compare-table th { background: #FBF3D8; font-family: 'Zen Kaku Gothic New', sans-serif; font-weight: 900; }
+  .stamp {
+    display: inline-block; transform: rotate(-3deg);
+    border: 3px solid #C85C3C; color: #C85C3C; border-radius: 10px;
+    padding: 3px 14px; font-family: 'Zen Kaku Gothic New', sans-serif; font-weight: 900;
+    font-size: 13px; letter-spacing: 0.06em;
+  }
+</style>
+<script src="./doc-page.js"></script>
+</helmet>
+<doc-page size="a4" margin="0.85in">
+
+<div style="position:relative; text-align:center; padding: 8px 0 28px; border-bottom: 4px solid #6B8E4E; overflow:visible;">
+  <div style="position:absolute; top:-18px; left:-10px; width:90px; height:70px; background:#CFE0B8; border-radius:58% 42% 63% 37% / 41% 52% 48% 59%; transform:rotate(-9deg); z-index:0;"></div>
+  <div style="position:absolute; top:-14px; right:6px; width:70px; height:70px; background:#F3C97E; border-radius:42% 58% 39% 61% / 55% 44% 56% 45%; transform:rotate(12deg); z-index:0;"></div>
+  <div style="position:relative; z-index:1;">
+  <div class="tag" style="background:#FBF3D8; color:#8A6A1E; margin-bottom:18px;">旅ラボ ・ 構想メモ v0.2 ・ 2026.08</div>
+  <h1 class="crayon" style="font-size:52px; color:#C85C3C; margin:0 0 10px; line-height:1.25;">学問でめぐる、日本の旅。</h1>
+  <p style="font-family:'Zen Maru Gothic',sans-serif; font-size:17px; color:#4A4235; margin:0;">場所を選ぶ前から旅は始まっている——歴史・地質学・自然・食文化・酒・水・暮らし・生き物。<br/>「なぜそこに、そういう文化があるのか」を科学と学問の視点でたどる旅行アプリの構想メモ。</p>
+  </div>
+</div>
+
+<h2 class="crayon" style="font-size:28px; color:#6B8E4E; margin-top:44px;">1. 課題意識</h2>
+<p style="font-family:'Zen Maru Gothic',sans-serif; font-size:15px; line-height:1.75; color:#3A3327;">
+既存の旅程アプリは「行き先が決まった後」を支援するものがほとんどです。ホテル・交通・観光スポットの効率的な組み合わせは得意ですが、「なぜこの土地にこの郷土料理が生まれたのか」「なぜこの酒がこの水で仕込まれるのか」「この地形は地質学的にどう成り立ったのか」といった、旅を面白くする"背景の知"にはほとんど触れません。
+</p>
+<p style="font-family:'Zen Maru Gothic',sans-serif; font-size:15px; line-height:1.75; color:#3A3327;">
+このアプリでは、行き先選びそのものを「学問的な好奇心」から始められるようにします。歴史・地質学・自然・文化人類学・進化論・科学・物理学・心理学・深海学・宗教学(学問としての宗教研究であり、信仰やスピリチュアルは扱いません)——こうした分野の知識を切り口に、旅先を発見し、旅程を組み立てます。
+</p>
+
+<h2 class="crayon" style="font-size:28px; color:#6B8E4E;">2. コンセプトと価値提案</h2>
+<div class="field-card" style="background:#fff; border-radius:16px; padding:24px 28px; box-shadow:0 4px 12px rgba(60,50,30,0.08); margin:16px 0;">
+  <p class="crayon" style="font-size:20px; color:#C85C3C; margin:0 0 12px;">「その土地を、成り立ちから旅する。」</p>
+  <p style="font-family:'Zen Maru Gothic',sans-serif; font-size:14.5px; line-height:1.7; color:#3A3327; margin:0;">
+  地形・気候・歴史・人の営みが積み重なって、今日の食文化や街並みができている——その因果関係を短い解説で見せることで、観光地が「ただの点」ではなく「なぜここにあるのか」を持つ場所として立ち上がります。
+  </p>
+</div>
+<ul style="font-family:'Zen Maru Gothic',sans-serif; font-size:14.5px; line-height:1.8; color:#3A3327; padding-left:20px;">
+  <li><strong>行き先探しが目的地選びから始まらない。</strong>「深海地形に興味がある」「発酵と水質の関係を知りたい」など、知的関心から旅先が浮かび上がります。</li>
+  <li><strong>一つの場所を多分野で立体的に見せる。</strong>地質学・歴史・食文化・生き物などが独立した情報ではなく、互いにつながった一つの物語として提示されます。</li>
+  <li><strong>効率的な旅程アプリと共存できる。</strong>ホテル予約やルート最適化を再発明するのではなく、「なぜそこへ行くと面白いか」を担う層として設計します。</li>
+</ul>
+
+<h2 class="crayon" style="font-size:28px; color:#6B8E4E;">3. 想定ユーザー像</h2>
+<p style="font-family:'Zen Maru Gothic',sans-serif; font-size:15px; line-height:1.75; color:#3A3327;">
+主な対象は<strong>知的好奇心の強い個人旅行者</strong>——観光ガイドの定型文では満足せず、「なぜ」を知りたいタイプの旅行者です。効率よりも発見を重視し、一人〜少人数での旅を好む層を想定します。<strong>子どもを含む家族での利用</strong>も想定するため、コピーは学術的すぎず、子どもでも読める平易さを保ちます。
+</p>
+<p style="font-family:'Zen Maru Gothic',sans-serif; font-size:15px; line-height:1.75; color:#3A3327;">
+重要な原則として、<strong>意思決定は常にユーザーに委ねます。</strong>興味関心からのおすすめ旅程生成はあくまで任意の補助機能とし、基本は「自分で選ぶ」体験をベースにします。選ぶ過程そのものが満足度につながるという考え方です。
+</p>
+
+<h2 class="crayon" style="font-size:28px; color:#6B8E4E;">4. 既存アプリとの違い</h2>
+<table class="compare-table" style="font-family:'Zen Maru Gothic',sans-serif;">
+  <thead>
+    <tr><th style="width:22%;">観点</th><th>じゃらん / るるぶ 等</th><th>Google 旅行 等</th><th>本アプリ</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>出発点</td><td>行き先や日程が決まっている前提</td><td>行き先や日程が決まっている前提</td><td>「知りたいこと」が出発点になれる</td></tr>
+    <tr><td>情報の性質</td><td>宿・グルメ・口コミ中心</td><td>ルート・価格・レビュー中心</td><td>成り立ち・地質・歴史・食文化のつながり</td></tr>
+    <tr><td>情報の見せ方</td><td>一覧・ランキング</td><td>比較・最適化</td><td>要約1〜2行 → タップで深掘り</td></tr>
+    <tr><td>役割</td><td>予約・実行支援</td><td>比較・実行支援</td><td>旅先発見・知的動機づけ(実行支援は既存アプリに委ねる余地あり)</td></tr>
+  </tbody>
+</table>
+
+<h2 class="crayon" style="font-size:28px; color:#6B8E4E; break-before:page;">5. 情報アーキテクチャ・画面構成</h2>
+<p style="font-family:'Zen Maru Gothic',sans-serif; font-size:15px; line-height:1.75; color:#3A3327;">
+アプリ本体はアニメーションを多用するため今回は実装しませんが、想定する画面構成は以下の通りです(計画書はこの構造の共有が目的です)。
+</p>
+<div class="field-card" style="background:#fff; border-radius:16px; padding:22px 26px; box-shadow:0 4px 12px rgba(60,50,30,0.08);">
+  <ol style="font-family:'Zen Maru Gothic',sans-serif; font-size:14.5px; line-height:2; color:#3A3327; padding-left:20px; margin:0;">
+    <li><strong>ホーム(旅程の基本情報)</strong> — このアプリは旅程作成が主目的のため、まず「何泊か」「何人か」「どこに行くか(未定でも可)」「興味から調べる」を入力する起点画面から始まる。行き先が決まっていなくても進める。</li>
+    <li><strong>行き先を決める(未定を選んだ場合)</strong> — 分野別の「問い」から候補地を探す画面(例:「なぜこの土地の水は酒に向くのか?」)。問いに紐づく候補地がカード形式で並ぶ。</li>
+    <li><strong>場所ページ</strong> — 一つの土地について、分野ごとのカードが並ぶ(地質・歴史・食文化・生き物など)。各カードは要約1〜2行のみを常時表示。</li>
+    <li><strong>深掘りビュー</strong> — カードをタップすると展開し、詳細な解説や関連する別の土地が表示される。</li>
+    <li><strong>旅程ページ</strong> — 選んだ場所を時系列・地図上に並べる。ここは一般的な旅程アプリに近い、実務的な画面。</li>
+    <li><strong>マイ関心(プロフィール的画面)</strong> — 好きな分野(地質学・深海学など)を登録し、おすすめの「問い」の傾向を調整する(任意)。</li>
+  </ol>
+</div>
+
+<h2 class="crayon" style="font-size:28px; color:#6B8E4E;">6. コンテンツ設計の原則:要約 → 深掘り</h2>
+<p style="font-family:'Zen Maru Gothic',sans-serif; font-size:15px; line-height:1.75; color:#3A3327;">
+情報量が多い題材だからこそ、常時表示は徹底して絞ります。
+</p>
+<ul style="font-family:'Zen Maru Gothic',sans-serif; font-size:14.5px; line-height:1.8; color:#3A3327; padding-left:20px;">
+  <li><strong>要約は1〜2行、かつ「問いかけ」の形にする。</strong>例:「なぜ出雲の海は透明度が高いのか?」であり、「出雲の海は透明度が高い。」という説明形では終わらせない。</li>
+  <li><strong>タップ後の詳細も長すぎない。</strong>1トピックあたり200〜400字程度+図解1点を基本とし、さらに知りたい場合は関連トピックへリンクする(クックラボの「なぜセクションは2文まで」という原則を踏襲)。</li>
+  <li><strong>正確性とエンタメ性はバランス型。</strong>学術的な誤りは避けつつ、専門用語は言い換え、驚きや意外性のある切り口を優先して選ぶ。出典表記はアプリ内には出さない(裏側のデータ管理としては保持する)。</li>
+</ul>
+
+<h2 class="crayon" style="font-size:28px; color:#6B8E4E;">7. 分野別知識カテゴリの設計</h2>
+<p style="font-family:'Zen Maru Gothic',sans-serif; font-size:15px; line-height:1.75; color:#3A3327;">
+当面は全10分野を一律に扱うのではなく、<strong>場所ごとに関連度の高い分野を自動選択</strong>しつつ、初期実装では下記の4分野を優先して深く作り込みます。
+</p>
+<div style="display:flex; flex-wrap:wrap; gap:14px; margin:18px 0;">
+  <div class="field-card" style="flex:1 1 260px; background:#F1F4E4; border-radius:16px; padding:18px 20px; box-shadow:0 4px 12px rgba(60,50,30,0.08); border-top:5px solid #6B8E4E; transform:rotate(-1deg);">
+    <span class="stamp">優先</span>
+    <p class="crayon" style="font-size:18px; color:#4E6B36; margin:14px 0 6px;">歴史</p>
+    <p style="font-family:'Zen Maru Gothic',sans-serif; font-size:13.5px; line-height:1.65; color:#3A3327; margin:0;">なぜその街道・港・城下町がそこに生まれたか。人の営みの積み重ね。</p>
+  </div>
+  <div class="field-card" style="flex:1 1 260px; background:#FCE9E3; border-radius:16px; padding:18px 20px; box-shadow:0 4px 12px rgba(60,50,30,0.08); border-top:5px solid #C85C3C; transform:rotate(1deg);">
+    <span class="stamp">優先</span>
+    <p class="crayon" style="font-size:18px; color:#A84A2F; margin:14px 0 6px;">地質学</p>
+    <p style="font-family:'Zen Maru Gothic',sans-serif; font-size:13.5px; line-height:1.65; color:#3A3327; margin:0;">地形・地層・火山・水質。景観と土地の産物の物理的な土台。</p>
+  </div>
+  <div class="field-card" style="flex:1 1 260px; background:#FBF0D6; border-radius:16px; padding:18px 20px; box-shadow:0 4px 12px rgba(60,50,30,0.08); border-top:5px solid #E0A83C; transform:rotate(-1deg);">
+    <span class="stamp">優先</span>
+    <p class="crayon" style="font-size:18px; color:#8A6A1E; margin:14px 0 6px;">自然・生き物</p>
+    <p style="font-family:'Zen Maru Gothic',sans-serif; font-size:13.5px; line-height:1.65; color:#3A3327; margin:0;">気候・生態系・固有種。進化論・深海学ともつながる入り口。</p>
+  </div>
+  <div class="field-card" style="flex:1 1 260px; background:#E4EEF4; border-radius:16px; padding:18px 20px; box-shadow:0 4px 12px rgba(60,50,30,0.08); border-top:5px solid #6E9FB8; transform:rotate(1deg);">
+    <span class="stamp" style="border-color:#6E9FB8; color:#3E7391;">優先</span>
+    <p class="crayon" style="font-size:18px; color:#3E7391; margin:14px 0 6px;">食文化・酒・水</p>
+    <p style="font-family:'Zen Maru Gothic',sans-serif; font-size:13.5px; line-height:1.65; color:#3A3327; margin:0;">なぜこの土地でこの発酵・調理法か。水質・気候との因果。</p>
+  </div>
+</div>
+<p style="font-family:'Zen Maru Gothic',sans-serif; font-size:14px; line-height:1.7; color:#5A5040;">
+残り6分野(文化人類学・進化論・科学・物理学・心理学・深海学・宗教学 ※学問的観点のみ)は、場所との関連が強い場合にのみ自動的に浮上させ、当面はカードの追加候補として控えめに扱います。例えば深海学は沖縄・下北など特定地域で、宗教学(信仰対象としてではなく建築史・社会制度としての研究)は出雲・京都などで関連度が上がる想定です。
+</p>
+
+<h2 class="crayon" style="font-size:28px; color:#6B8E4E; break-before:page;">8. データ・API戦略</h2>
+<p style="font-family:'Zen Maru Gothic',sans-serif; font-size:15px; line-height:1.75; color:#3A3327;">
+計画書の段階で全情報を書き込むと管理不能になるため、実データはAPI経由で都度取得・生成する方針とします。方式は3案を比較した上で、<strong>B(一次情報+LLM要約)を主軸とし、Bで手薄になる部分をA(LLMリアルタイム生成)で補う</strong>ハイブリッドに決定しました。
+</p>
+<table class="compare-table" style="font-family:'Zen Maru Gothic',sans-serif;">
+  <thead>
+    <tr><th style="width:20%;">方式</th><th>概要</th><th>強み</th><th>弱み</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>A. LLMリアルタイム生成</strong></td><td>Claude等のAPIに場所と分野を渡し、その場で要約・詳細文を生成</td><td>実装が速い。分野の組み合わせに柔軟に対応</td><td>事実誤認のリスク。生成コストが利用のたびに発生</td></tr>
+    <tr><td><strong>B. 一次情報 + LLM要約(ハイブリッド)</strong></td><td>Wikipedia/Wikidata・気象庁・地質調査総合センター等のオープンデータを取得し、LLMが要約・接続文を生成</td><td>事実の裏付けがあり出典を明示しやすい。バランス型の方針と相性が良い</td><td>分野ごとにデータソースの選定・正規化が必要で初期構築コストが高い</td></tr>
+    <tr><td><strong>C. 事前キュレーションDB</strong></td><td>専門家監修のもと地域・分野ごとのコンテンツを事前作成</td><td>正確性・品質が最も安定</td><td>スケールしない。日本全国を1地方ずつ深掘りする方針とは相性が悪い(人手がボトルネック)</td></tr>
+  </tbody>
+</table>
+<p style="font-family:'Zen Maru Gothic',sans-serif; font-size:14.5px; line-height:1.75; color:#3A3327; margin-top:14px;">
+オープンデータ(Wikipedia/Wikidata、気象庁、地質調査総合センター等)を基本の裏付けとして使い、データが薄い分野・トピックはLLM生成で補完します。出典表記はアプリ画面には出さず、裏側のデータ管理でのみ保持します。
+</p>
+
+<h2 class="crayon" style="font-size:28px; color:#6B8E4E;">9. 第一弾:日本のパイロット地域</h2>
+<p style="font-family:'Zen Maru Gothic',sans-serif; font-size:15px; line-height:1.75; color:#3A3327;">
+全国を薄く網羅するのではなく、性格の異なる3地域を選び、それぞれで分野横断の物語(地質→水→酒→食→歴史→暮らし)を丁寧に組み上げる方針とします。パイロット地域は<strong>東京・香川・沖縄</strong>に決定しました。
+</p>
+<ul style="font-family:'Zen Maru Gothic',sans-serif; font-size:14.5px; line-height:1.8; color:#3A3327; padding-left:20px;">
+  <li><strong>東京</strong> — 都市の成り立ち(埋立地・水路・地形)、江戸からの歴史の重なり、多様な食文化が密集する対照的なフィールド。</li>
+  <li><strong>香川</strong> — 瀬戸内の地質・気候(小さな島々・少雨)と、うどん・醤油・オリーブなど食文化との因果関係が見えやすい。</li>
+  <li><strong>沖縄</strong> — 地質学(サンゴ礁・琉球石灰岩)、深海学・海洋生物、独自の文化人類学的背景がそろい、他地域と対照的な物語になる。</li>
+</ul>
+<p style="font-family:'Zen Maru Gothic',sans-serif; font-size:14.5px; line-height:1.75; color:#3A3327;">
+都市・瀬戸内・島しょという性格の異なる3地域を並べることで、コンテンツ設計の型(テンプレート)が特定の地域性に依存しないかを検証します。
+</p>
+
+<h2 class="crayon" style="font-size:28px; color:#6B8E4E;">10. 決定事項・次のステップ</h2>
+<div class="field-card" style="background:#FBF3D8; border-radius:16px; padding:22px 26px; border:2px dashed rgba(200,92,60,0.4);">
+  <ul style="font-family:'Zen Maru Gothic',sans-serif; font-size:14.5px; line-height:1.9; color:#3A3327; padding-left:20px; margin:0;">
+    <li><strong>アプリ名</strong> — 「旅ラボ」に決定。</li>
+    <li><strong>おすすめ vs 自由選択</strong> — 自由選択をメインとし、興味からのおすすめはあくまでサブの位置づけとする。</li>
+    <li><strong>プロトタイプ</strong> — この次のステップとして、アニメーションを含むアプリ本体のモック作成に着手する。</li>
+    <li><strong>旅程実行部分</strong> — 移動は利用者自身の検索に任せ、自作しない。一方で宿は、体験型旅館・民泊・古民家などその土地に合ったスタイルを場所ごとにおすすめできるようにする。ここは宿泊予約API(楽天トラベルやじゃらん等)との連携が必要になる見込みで、次のプロトタイプ段階で具体的に検討する。</li>
+    <li><strong>写真・イラスト素材</strong> — 必要な場面ではその都度相談。</li>
+  </ul>
+</div>
+
+<div style="margin-top:40px; padding-top:18px; border-top:3px dotted rgba(107,142,78,0.35); text-align:center; font-family:'Nunito',sans-serif; font-size:12px; color:#8A8068;">
+旅ラボ 構想メモ v0.2 — 個人利用のための整理メモ
+</div>
+
+</doc-page>
+</x-dc>
+</body>
+</html>

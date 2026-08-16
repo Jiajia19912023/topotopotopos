@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Yomogi&family=Zen+Maru+Gothic:wght@400;500;700;900&family=Zen+Kaku+Gothic+New:wght@700;900&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style id="__om-edit-overrides"></style>
+<style>
+  html, body { margin: 0; }
+  body { background: #F5EFE6; }
+  * { box-sizing: border-box; }
+  ::-webkit-scrollbar { display: none; }
+</style>
+</helmet>
+
+<div style="min-height:100vh; background:#F5EFE6; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:22px; padding:48px 24px; position:relative; overflow:hidden; font-family:'Zen Maru Gothic',sans-serif;">
+  <div style="position:absolute; top:60px; left:8%; width:120px; height:100px; background:#CFE0B8; border-radius:58% 42% 63% 37% / 41% 52% 48% 59%; transform:rotate(-9deg); opacity:0.7;"></div>
+  <div style="position:absolute; bottom:80px; right:10%; width:140px; height:110px; background:#F3C97E; border-radius:42% 58% 39% 61% / 55% 44% 56% 45%; transform:rotate(12deg); opacity:0.6;"></div>
+  <div style="position:absolute; top:40%; right:4%; width:90px; height:90px; background:#E9C2B8; border-radius:50%; opacity:0.55;"></div>
+
+  <div style="text-align:center; position:relative; z-index:1;">
+    <p style="font-family:'Yomogi',sans-serif; font-size:34px; color:#C85C3C; margin:0;">旅ラボ</p>
+    <p style="font-size:13px; color:#8A8068; margin:4px 0 0; letter-spacing:0.04em;">学問でめぐる、日本の旅。— プロトタイプ</p>
+  </div>
+
+  <x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" hint-size="402,874" style="position:relative; z-index:1;">
+    <div style="height:100%; width:100%; display:flex; flex-direction:column; background:#F5EFE6; position:relative; overflow:hidden;">
+
+      <div id="appScroll" style="flex:1; overflow:auto;">
+
+        <sc-if value="{{ isPlaceScreen }}" hint-placeholder-val="{{ false }}">
+          <div>
+            <div style="padding:58px 20px 18px; background:{{ activeRegion.soft }};">
+              <button onClick="{{ backFromPlace }}" style="border:none; background:rgba(255,255,255,0.6); width:36px; height:36px; border-radius:999px; display:flex; align-items:center; justify-content:center; margin-bottom:14px; padding:0;">
+                <svg width="10" height="16" viewBox="0 0 10 16" fill="none"><path d="M8 1.5L1.5 8l6.5 6.5" stroke="#3A3327" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              </button>
+              <p style="font-family:'Yomogi',sans-serif; font-size:26px; color:{{ activeRegion.accent }}; margin:0 0 6px;">{{ activeRegion.name }}</p>
+              <p style="font-size:13px; color:#3A3327; line-height:1.6; margin:0;">{{ activeRegion.tagline }}</p>
+            </div>
+
+            <div style="padding:16px 20px 8px; display:flex; flex-direction:column; gap:10px;">
+              <sc-for list="{{ activeRegionFields }}" as="card" hint-placeholder-count="4">
+                <div style="background:#fff; border-radius:16px; box-shadow:0 4px 12px rgba(60,50,30,0.08); overflow:{{ card.innerOverflow }};">
+                  <button onClick="{{ card.onToggle }}" style="width:100%; border:none; background:none; padding:14px 16px; display:flex; align-items:flex-start; gap:10px; text-align:left; cursor:pointer;">
+                    <span style="flex-shrink:0; margin-top:2px; font-family:'Nunito',sans-serif; font-weight:800; font-size:10px; letter-spacing:0.05em; color:{{ card.color }}; background:rgba(0,0,0,0.04); border-radius:999px; padding:3px 9px;">{{ card.label }}</span>
+                    <span style="flex:1; font-family:'Zen Maru Gothic',sans-serif; font-weight:700; font-size:14.5px; color:#3A3327; line-height:1.5;">{{ card.hook }}</span>
+                    <svg width="12" height="12" viewBox="0 0 12 12" style="flex-shrink:0; margin-top:4px; transition:transform 240ms cubic-bezier(0.2,0.8,0.2,1); transform:{{ card.chevronRotate }};"><path d="M2 4l4 4 4-4" stroke="#8A8068" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                  </button>
+                  <div style="display:grid; grid-template-rows:{{ card.rows }}; transition:grid-template-rows 320ms cubic-bezier(0.2,0.8,0.2,1);">
+                    <div style="overflow:{{ card.innerOverflow }};">
+                      <p style="margin:0 16px 16px; padding-top:2px; border-top:1px dashed rgba(60,50,30,0.14); padding-left:0; font-size:13px; line-height:1.9; color:#3A3327;">
+<sc-for list="{{ card.segments }}" as="seg" hint-placeholder-count="1"><span style="position:relative; display:{{ seg.display }};"><span onClick="{{ seg.onClick }}" style="color:{{ seg.color }}; border-bottom:{{ seg.underline }}; cursor:{{ seg.cursor }}; font-weight:{{ seg.weight }};">{{ seg.text }}</span><sc-if value="{{ seg.isActive }}" hint-placeholder-val="{{ false }}"><span style="position:absolute; top:calc(100% + 6px); left:{{ seg.tipLeft }}; right:{{ seg.tipRight }}; width:200px; max-width:calc(100vw - 40px); background:#3A3327; border-radius:10px; padding:8px 11px; box-shadow:0 8px 20px rgba(60,50,30,0.32); z-index:20; font-family:'Zen Maru Gothic',sans-serif; font-size:11.5px; line-height:1.65; font-weight:400; color:rgba(255,255,255,0.9); display:block;">{{ seg.desc }}</span></sc-if></span></sc-for>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+
+            <div style="padding:6px 20px 4px;">
+              <p style="font-family:'Zen Maru Gothic',sans-serif; font-weight:700; font-size:13.5px; color:#3A3327; margin:0 0 10px;">宿泊スタイルのおすすめ</p>
+              <div style="display:flex; flex-direction:column; gap:8px;">
+                <sc-for list="{{ activeRegion.lodging }}" as="lodge" hint-placeholder-count="2">
+                  <div style="background:#fff; border-radius:14px; padding:12px 14px; box-shadow:0 3px 10px rgba(60,50,30,0.06);">
+                    <p style="font-family:'Zen Maru Gothic',sans-serif; font-weight:700; font-size:13.5px; color:#3A3327; margin:0 0 3px;">{{ lodge.style }}</p>
+                    <p style="font-size:12.5px; color:#8A8068; line-height:1.6; margin:0;">{{ lodge.desc }}</p>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+
+            <div style="padding:14px 20px 24px;">
+              <sc-if value="{{ hasCategories }}" hint-placeholder-val="{{ true }}">
+                <p style="font-family:'Zen Maru Gothic',sans-serif; font-weight:700; font-size:13.5px; color:#3A3327; margin:0 0 10px;">旅程に追加</p>
+                <div style="display:flex; flex-wrap:wrap; gap:8px;">
+                  <sc-for list="{{ placeCategoryChips }}" as="cat" hint-placeholder-count="1">
+                    <button onClick="{{ cat.onToggle }}" style="border:2px solid {{ cat.chipBorder }}; background:{{ cat.chipBg }}; color:{{ cat.chipColor }}; font-family:'Zen Maru Gothic',sans-serif; font-weight:700; font-size:13px; padding:9px 14px; border-radius:999px;">{{ cat.mark }}{{ cat.name }}</button>
+                  </sc-for>
+                </div>
+                <p style="font-size:11.5px; color:#8A8068; margin:10px 0 0;">カテゴリーは「旅程」タブで作成・名前変更できます。</p>
+              </sc-if>
+              <sc-if value="{{ noCategories }}" hint-placeholder-val="{{ false }}">
+                <button onClick="{{ quickAddCurrent }}" style="width:100%; border:none; background:#C85C3C; color:#fff; text-align:center; font-family:'Zen Kaku Gothic New',sans-serif; font-weight:900; font-size:14.5px; padding:14px; border-radius:999px; box-shadow:0 6px 16px rgba(200,92,60,0.35);">旅程に追加する</button>
+              </sc-if>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ isTabsScreen }}" hint-placeholder-val="{{ true }}">
+
+          <sc-if value="{{ isHomeTab }}" hint-placeholder-val="{{ true }}">
+            <div style="padding:58px 20px 24px;">
+              <p style="font-family:'Yomogi',sans-serif; font-size:24px; color:#3A3327; margin:0 0 4px;">どこかへ、行きたい。</p>
+              <p style="font-size:13px; color:#8A8068; margin:0 0 22px;">日数と気になるジャンルを選ぶと、旅程を提案します。</p>
+
+              <div style="background:#fff; border-radius:16px; padding:18px 20px; box-shadow:0 4px 12px rgba(60,50,30,0.08); margin-bottom:14px;">
+                <div style="display:flex; align-items:center; justify-content:space-between; padding:8px 0;">
+                  <span style="font-family:'Zen Maru Gothic',sans-serif; font-weight:700; font-size:14.5px; color:#3A3327;">泊数</span>
+                  <div style="display:flex; align-items:center; gap:16px;">
+                    <button onClick="{{ decNights }}" style="width:32px; height:32px; border-radius:999px; border:1px solid rgba(60,50,30,0.14); background:#F5EFE6; font-size:18px; color:#3A3327; padding:0;">–</button>
+                    <span style="font-family:'Nunito',sans-serif; font-weight:800; font-size:16px; color:#3A3327; min-width:44px; text-align:center;">{{ nights }}泊</span>
+                    <button onClick="{{ incNights }}" style="width:32px; height:32px; border-radius:999px; border:1px solid rgba(60,50,30,0.14); background:#F5EFE6; font-size:18px; color:#3A3327; padding:0;">+</button>
+                  </div>
+                </div>
+                <div style="height:1px; background:rgba(60,50,30,0.08); margin:4px 0;"></div>
+                <div style="display:flex; align-items:center; justify-content:space-between; padding:8px 0;">
+                  <span style="font-family:'Zen Maru Gothic',sans-serif; font-weight:700; font-size:14.5px; color:#3A3327;">人数</span>
+                  <div style="display:flex; align-items:center; gap:16px;">
+                    <button onClick="{{ decPeople }}" style="width:32px; height:32px; border-radius:999px; border:1px solid rgba(60,50,30,0.14); background:#F5EFE6; font-size:18px; color:#3A3327; padding:0;">–</button>
+                    <span style="font-family:'Nunito',sans-serif; font-weight:800; font-size:16px; color:#3A3327; min-width:44px; text-align:center;">{{ people }}人</span>
+                    <button onClick="{{ incPeople }}" style="width:32px; height:32px; border-radius:999px; border:1px solid rgba(60,50,30,0.14); background:#F5EFE6; font-size:18px; color:#3A3327; padding:0;">+</button>
+                  </div>
+                </div>
+              </div>
+
+              <p style="font-family:'Zen Maru Gothic',sans-serif; font-weight:700; font-size:13.5px; color:#3A3327; margin:0 0 3px;">興味のあるジャンル</p>
+              <p style="font-size:11.5px; color:#8A8068; margin:0 0 10px;">気になるものを選ぶと、そのテーマに沿った旅程を提案します(複数OK)。</p>
+              <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px;">
+                <sc-for list="{{ fieldChips }}" as="chip" hint-placeholder-count="4">
+                  <button onClick="{{ chip.onSelect }}" style="border:none; background:{{ chip.chipBg }}; color:{{ chip.chipColor }}; font-family:'Zen Maru Gothic',sans-serif; font-weight:700; font-size:13px; padding:8px 14px; border-radius:999px; box-shadow:0 2px 6px rgba(60,50,30,0.08);">{{ chip.label }}</button>
+                </sc-for>
+              </div>
+
+              <button onClick="{{ generateSuggestions }}" style="width:100%; border:none; background:#C85C3C; color:#fff; font-family:'Zen Kaku Gothic New',sans-serif; font-weight:900; font-size:15px; padding:16px; border-radius:16px; box-shadow:0 6px 16px rgba(200,92,60,0.32); margin-bottom:8px;">おすすめ旅程をつくる</button>
+              <p style="text-align:center; font-size:11px; color:#8A8068; margin:0 0 20px;">泊数・人数と、選んだジャンルに合わせて3案お出しします。</p>
+
+              <sc-if value="{{ hasSuggestions }}" hint-placeholder-val="{{ false }}">
+                <p style="font-family:'Yomogi',sans-serif; font-size:18px; color:#4E6B36; margin:6px 0 12px;">あなたにおすすめの旅程</p>
+                <div style="display:flex; flex-direction:column; gap:14px;">
+                  <sc-for list="{{ suggestionCards }}" as="sg" hint-placeholder-count="3">
+                    <div style="background:#fff; border-radius:18px; padding:16px 16px 14px; box-shadow:0 4px 14px rgba(60,50,30,0.1);">
+                      <span style="display:inline-block; font-family:'Zen Kaku Gothic New',sans-serif; font-weight:900; font-size:11px; color:{{ sg.tagColor }}; background:{{ sg.tagBg }}; border-radius:999px; padding:3px 12px; margin-bottom:8px;">{{ sg.badge }}</span>
+                      <p style="font-family:'Zen Maru Gothic',sans-serif; font-weight:700; font-size:16px; color:#3A3327; margin:0 0 3px;">{{ sg.title }}</p>
+                      <p style="font-size:11.5px; color:#8A8068; margin:0 0 4px;">{{ sg.note }}</p>
+                      <p style="font-size:11.5px; color:#8A6A5A; margin:0 0 12px;">{{ sg.nightsLabel }} ・ {{ sg.totalLabel }}</p>
+                      <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:14px;">
+                        <sc-for list="{{ sg.places }}" as="pl" hint-placeholder-count="2">
+                          <div style="display:flex; align-items:flex-start; gap:10px;">
+                            <span style="flex-shrink:0; margin-top:2px; font-family:'Zen Kaku Gothic New',sans-serif; font-weight:900; font-size:10px; color:#8A8068; background:#F0ECE3; border-radius:999px; padding:2px 8px;">{{ pl.dayLabel }}</span>
+                            <div style="width:6px; align-self:stretch; border-radius:6px; background:{{ pl.accent }};"></div>
+                            <div style="flex:1;">
+                              <p style="font-family:'Zen Maru Gothic',sans-serif; font-weight:700; font-size:13.5px; color:#3A3327; margin:0;">{{ pl.name }}<span style="font-weight:400; font-size:11px; color:#8A8068;"> ・ {{ pl.fieldLabel }}</span></p>
+                              <p style="font-size:11.5px; color:#8A8068; margin:2px 0 0; line-height:1.5;">{{ pl.hook }}</p>
+                            </div>
+                          </div>
+                        </sc-for>
+                      </div>
+                      <button onClick="{{ sg.onAdopt }}" style="width:100%; border:2px solid #6B8E4E; background:#F1F4E4; color:#4E6B36; font-family:'Zen Kaku Gothic New',sans-serif; font-weight:900; font-size:13.5px; padding:12px; border-radius:12px;">この旅程にする</button>
+                    </div>
+                  </sc-for>
+                </div>
+              </sc-if>
+              <sc-if value="{{ noSuggestions }}" hint-placeholder-val="{{ true }}">
+                <p style="text-align:center; color:#B7AE9C; font-size:12.5px; padding:10px 0 4px; line-height:1.7;">ジャンルと日数を選んで「おすすめ旅程をつくる」を押すと、<br/>ここに3つの旅程プランが並びます。</p>
+              </sc-if>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ isDiscoverTab }}" hint-placeholder-val="{{ false }}">
+            <div style="padding:58px 20px 24px;">
+              <p style="font-family:'Yomogi',sans-serif; font-size:24px; color:#3A3327; margin:0 0 4px;">気になることから、探す</p>
+              <p style="font-size:13px; color:#8A8068; margin:0 0 18px;">気になる分野を選ぶ・県名で探す、どちらでもOK(分野は複数えらべます)。</p>
+
+              <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px;">
+                <sc-for list="{{ fieldChips }}" as="chip" hint-placeholder-count="4">
+                  <button onClick="{{ chip.onSelect }}" style="border:none; background:{{ chip.chipBg }}; color:{{ chip.chipColor }}; font-family:'Zen Maru Gothic',sans-serif; font-weight:700; font-size:13.5px; padding:9px 16px; border-radius:999px; box-shadow:0 2px 6px rgba(60,50,30,0.08);">{{ chip.label }}</button>
+                </sc-for>
+              </div>
+
+              <input value="{{ discoverQuery }}" onChange="{{ onDiscoverQueryChange }}" placeholder="県名やよみでもしぼれる(例:おき)" style="width:100%; border:1px solid rgba(60,50,30,0.16); background:#fff; border-radius:12px; padding:10px 14px; font-size:13.5px; font-family:'Zen Maru Gothic',sans-serif; color:#3A3327; outline:none; margin-bottom:16px;"></input>
+
+              <sc-if value="{{ showDiscoverResults }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex; flex-direction:column; gap:10px;">
+                  <sc-for list="{{ discoverResults }}" as="res" hint-placeholder-count="2">
+                    <button onClick="{{ res.onOpen }}" style="text-align:left; border:none; background:#fff; border-radius:16px; padding:16px 18px; box-shadow:0 4px 12px rgba(60,50,30,0.08); display:flex; flex-direction:column; gap:6px;">
+                      <span style="font-family:'Nunito',sans-serif; font-weight:800; font-size:11px; letter-spacing:0.05em; color:{{ res.region.accent }};">{{ res.region.name }}</span>
+                      <span style="font-family:'Zen Maru Gothic',sans-serif; font-weight:700; font-size:14.5px; color:#3A3327; line-height:1.5;">{{ res.hook }}</span>
+                    </button>
+                  </sc-for>
+                </div>
+                <sc-if value="{{ hasNoDiscoverHits }}" hint-placeholder-val="{{ false }}">
+                  <p style="text-align:center; color:#8A8068; font-size:13px; margin-top:24px;">条件に合う旅先が見つかりませんでした。分野や県名を変えてみましょう。</p>
+                </sc-if>
+              </sc-if>
+              <sc-if value="{{ noDiscoverInput }}" hint-placeholder-val="{{ true }}">
+                <p style="text-align:center; color:#8A8068; font-size:13.5px; margin-top:40px;">分野を選ぶか、県名で検索すると、旅先のヒントが出てきます。</p>
+              </sc-if>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ isItineraryTab }}" hint-placeholder-val="{{ false }}">
+            <div style="padding:58px 20px 24px;">
+              <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:12px; margin-bottom:16px;">
+                <div>
+                  <p style="font-family:'Yomogi',sans-serif; font-size:24px; color:#3A3327; margin:0 0 4px;">旅程</p>
+                  <p style="font-size:13px; color:#8A8068; margin:0;">日ごとの旅先と、その土地の学びをまとめました。</p>
+                </div>
+                <button onClick="{{ resetItinerary }}" style="flex-shrink:0; border:1px solid rgba(60,50,30,0.2); background:#fff; color:#8A8068; font-family:'Zen Maru Gothic',sans-serif; font-size:11.5px; padding:6px 12px; border-radius:999px; margin-top:4px;">リセット</button>
+              </div>
+
+              <div style="background:#fff; border-radius:16px; padding:16px 18px; box-shadow:0 4px 12px rgba(60,50,30,0.08); margin-bottom:16px;">
+                <p style="font-family:'Zen Maru Gothic',sans-serif; font-weight:700; font-size:13.5px; color:#3A3327; margin:0 0 6px;">この旅の基本</p>
+                <div style="display:flex; align-items:center; justify-content:space-between; padding:8px 0;">
+                  <span style="font-family:'Zen Maru Gothic',sans-serif; font-weight:700; font-size:14px; color:#3A3327;">泊数</span>
+                  <div style="display:flex; align-items:center; gap:14px;">
+                    <button onClick="{{ decNights }}" style="width:30px; height:30px; border-radius:999px; border:1px solid rgba(60,50,30,0.14); background:#F5EFE6; font-size:17px; color:#3A3327; padding:0;">–</button>
+                    <span style="font-family:'Nunito',sans-serif; font-weight:800; font-size:15px; color:#3A3327; min-width:70px; text-align:center;">{{ nights }}泊{{ tripDays }}日</span>
+                    <button onClick="{{ incNights }}" style="width:30px; height:30px; border-radius:999px; border:1px solid rgba(60,50,30,0.14); background:#F5EFE6; font-size:17px; color:#3A3327; padding:0;">+</button>
+                  </div>
+                </div>
+                <div style="height:1px; background:rgba(60,50,30,0.08); margin:2px 0;"></div>
+                <div style="display:flex; align-items:center; justify-content:space-between; padding:8px 0;">
+                  <span style="font-family:'Zen Maru Gothic',sans-serif; font-weight:700; font-size:14px; color:#3A3327;">人数</span>
+                  <div style="display:flex; align-items:center; gap:14px;">
+                    <button onClick="{{ decPeople }}" style="width:30px; height:30px; border-radius:999px; border:1px solid rgba(60,50,30,0.14); background:#F5EFE6; font-size:17px; color:#3A3327; padding:0;">–</button>
+                    <span style="font-family:'Nunito',sans-serif; font-weight:800; font-size:15px; color:#3A3327; min-width:70px; text-align:center;">{{ people }}人</span>
+                    <button onClick="{{ incPeople }}" style="width:30px; height:30px; border-radius:999px; border:1px solid rgba(60,50,30,0.14); background:#F5EFE6; font-size:17px; color:#3A3327; padding:0;">+</button>
+                  </div>
+                </div>
+              </div>
+
+              <sc-for list="{{ categoriesView }}" as="cat" hint-placeholder-count="1">
+                <div style="background:#FBF7F0; border:1px solid rgba(60,50,30,0.08); border-radius:18px; padding:14px 14px 16px; margin-bottom:14px;">
+                  <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px;">
+                    <input value="{{ cat.nameValue }}" onChange="{{ cat.onRename }}" placeholder="カテゴリー名" style="flex:1; min-width:0; border:none; border-bottom:1.5px dashed rgba(60,50,30,0.25); background:transparent; font-family:'Zen Maru Gothic',sans-serif; font-weight:700; font-size:16px; color:#3A3327; padding:4px 2px; outline:none;"></input>
+                    <span style="flex-shrink:0; font-size:11px; color:#8A8068;">{{ cat.count }}</span>
+                    <button onClick="{{ cat.onDelete }}" style="flex-shrink:0; border:none; background:none; color:#B7AE9C; font-size:16px; padding:4px 6px;">✕</button>
+                  </div>
+
+                  <sc-if value="{{ cat.hasMultiple }}" hint-placeholder-val="{{ false }}">
+                    <p style="text-align:center; color:#8A8068; font-size:11.5px; margin:0 0 12px;">合計移動 約{{ cat.totalTravelHours }}時間</p>
+                  </sc-if>
+
+                  <sc-if value="{{ cat.hasItems }}" hint-placeholder-val="{{ true }}">
+                    <sc-for list="{{ cat.dayGroups }}" as="day" hint-placeholder-count="2">
+                      <sc-if value="{{ day.hasDayItems }}" hint-placeholder-val="{{ true }}">
+                        <div style="margin-bottom:12px;">
+                          <div style="display:flex; align-items:center; gap:8px; margin:2px 0 8px;">
+                            <span style="font-family:'Zen Kaku Gothic New',sans-serif; font-weight:900; font-size:13px; color:#4E6B36; background:#EDF2E0; border-radius:999px; padding:3px 12px;">{{ day.label }}</span>
+                            <sc-if value="{{ day.hasDayTravel }}" hint-placeholder-val="{{ false }}">
+                              <span style="font-size:11px; color:#8A8068;">この日の移動 約{{ day.dayTravelHours }}時間</span>
+                            </sc-if>
+                          </div>
+                          <div style="display:flex; flex-direction:column; gap:8px;">
+                            <sc-for list="{{ day.items }}" as="item" hint-placeholder-count="2">
+                              <div>
+                                <sc-if value="{{ item.hasHop }}" hint-placeholder-val="{{ false }}">
+                                  <p style="text-align:center; font-size:11px; color:#B08A5A; margin:0 0 4px;">{{ item.hopLabel }}</p>
+                                </sc-if>
+                                <div style="background:#fff; border-radius:14px; padding:12px 14px; box-shadow:0 3px 10px rgba(60,50,30,0.06);">
+                                  <div style="display:flex; align-items:center; gap:10px;">
+                                    <div style="display:flex; flex-direction:column; gap:2px;">
+                                      <button onClick="{{ item.onMoveUp }}" disabled="{{ item.isFirst }}" style="width:24px; height:20px; border:none; background:#F5EFE6; border-radius:6px; color:#3A3327; opacity:{{ item.upOpacity }}; font-size:10px; padding:0;">▲</button>
+                                      <button onClick="{{ item.onMoveDown }}" disabled="{{ item.isLast }}" style="width:24px; height:20px; border:none; background:#F5EFE6; border-radius:6px; color:#3A3327; opacity:{{ item.downOpacity }}; font-size:10px; padding:0;">▼</button>
+                                    </div>
+                                    <div style="width:8px; height:38px; border-radius:6px; background:{{ item.accent }};"></div>
+                                    <div style="flex:1;" onClick="{{ item.onOpen }}">
+                                      <p style="font-family:'Zen Maru Gothic',sans-serif; font-weight:700; font-size:14.5px; color:#3A3327; margin:0;">{{ item.name }}</p>
+                                      <sc-if value="{{ item.hasGenre }}" hint-placeholder-val="{{ true }}">
+                                        <p style="margin:5px 0 0;"><span style="display:inline-block; font-family:'Zen Maru Gothic',sans-serif; font-weight:700; font-size:10.5px; color:#fff; background:{{ item.genreColor }}; border-radius:999px; padding:2px 9px;">{{ item.genreLabel }}</span></p>
+                                        <p style="font-size:12px; color:#8A8068; margin:5px 0 0; line-height:1.55;">{{ item.genreHook }}</p>
+                                      </sc-if>
+                                      <sc-if value="{{ item.noGenre }}" hint-placeholder-val="{{ false }}">
+                                        <p style="font-size:12px; color:#8A8068; margin:2px 0 0; line-height:1.5;">{{ item.tagline }}</p>
+                                      </sc-if>
+                                    </div>
+                                    <button onClick="{{ item.onRemove }}" style="border:none; background:none; color:#8A8068; font-size:12px; padding:6px;">削除</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </sc-for>
+                          </div>
+                        </div>
+                      </sc-if>
+                      <sc-if value="{{ day.noDayItems }}" hint-placeholder-val="{{ false }}">
+                        <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px; opacity:0.7;">
+                          <span style="font-family:'Zen Kaku Gothic New',sans-serif; font-weight:900; font-size:12px; color:#B7AE9C; background:#F0ECE3; border-radius:999px; padding:3px 12px;">{{ day.label }}</span>
+                          <span style="font-size:11px; color:#B7AE9C;">ゆっくり過ごす日（予定なし）</span>
+                        </div>
+                      </sc-if>
+                    </sc-for>
+                  </sc-if>
+                  <sc-if value="{{ cat.noItems }}" hint-placeholder-val="{{ false }}">
+                    <p style="text-align:center; color:#B7AE9C; font-size:12.5px; padding:8px 0; line-height:1.6;">まだ場所がありません。<br/>下の「旅先を追加」から入れましょう。</p>
+                  </sc-if>
+                  <button onClick="{{ goDiscover }}" style="width:100%; border:1px dashed rgba(60,50,30,0.3); background:#fff; color:#8A6A5A; font-family:'Zen Maru Gothic',sans-serif; font-weight:700; font-size:12.5px; padding:11px; border-radius:12px; margin-top:4px;">＋ 旅先を追加（「探す」から選ぶ）</button>
+                </div>
+              </sc-for>
+
+              <sc-if value="{{ canAddCategory }}" hint-placeholder-val="{{ true }}">
+                <button onClick="{{ createCategory }}" style="width:100%; border:2px dashed #6B8E4E; background:#F1F4E4; color:#4E6B36; font-family:'Zen Kaku Gothic New',sans-serif; font-weight:700; font-size:13.5px; padding:13px; border-radius:14px;">＋ カテゴリーを作成</button>
+              </sc-if>
+              <sc-if value="{{ atCategoryLimit }}" hint-placeholder-val="{{ false }}">
+                <p style="text-align:center; color:#8A8068; font-size:12px; margin:6px 0 0;">カテゴリーは最大10個までです。</p>
+              </sc-if>
+            </div>
+          </sc-if>
+
+        </sc-if>
+
+      </div>
+
+      <sc-if value="{{ showChrome }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex; align-items:center; justify-content:space-around; padding:10px 8px 22px; background:rgba(255,255,255,0.9); border-top:1px solid rgba(60,50,30,0.08); backdrop-filter:blur(16px);">
+          <button onClick="{{ goHome }}" style="border:none; background:none; display:flex; flex-direction:column; align-items:center; gap:4px; padding:4px 10px; color:{{ homeColor }};">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 11l8-7 8 7v8a1 1 0 01-1 1h-4v-6h-6v6H5a1 1 0 01-1-1v-8z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></path></svg>
+            <span style="font-size:10px; font-family:'Zen Maru Gothic',sans-serif; font-weight:700;">ホーム</span>
+          </button>
+          <button onClick="{{ goDiscover }}" style="border:none; background:none; display:flex; flex-direction:column; align-items:center; gap:4px; padding:4px 10px; color:{{ discoverColor }};">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"></circle><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg>
+            <span style="font-size:10px; font-family:'Zen Maru Gothic',sans-serif; font-weight:700;">探す</span>
+          </button>
+          <button onClick="{{ goItinerary }}" style="border:none; background:none; display:flex; flex-direction:column; align-items:center; gap:4px; padding:4px 10px; color:{{ itineraryColor }};">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h10M4 18h13" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg>
+            <span style="font-size:10px; font-family:'Zen Maru Gothic',sans-serif; font-weight:700;">旅程</span>
+          </button>
+        </div>
+      </sc-if>
+
+    </div>
+  </x-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {
+    tab: 'home',
+    screen: 'tabs',
+    returnScreen: 'tabs',
+    regions: [],
+    nights: 2,
+    people: 2,
+    destinationId: null,
+    budgetId: null,
+    selectedFieldIds: [],
+    activePlaceId: null,
+    expandedCardId: null,
+    focusFieldId: null,
+    itinerary: [],
+    categories: [{ id: 'cat1', name: '旅程1' }],
+    interests: [],
+    chatMessages: [],
+    chatInput: '',
+    chatLoading: false,
+    sortMethodByCat: {},
+    activeTerm: null,
+    fieldOrder: [],
+    destQuery: '',
+    discoverQuery: '',
+    suggestions: [],
+  };
+
+  componentDidMount() {
+    if (this._loadedData) return;
+    this._loadedData = true;
+    import('./trip-data.js?v=19').then((m) => {
+      this._travelHoursBetween = m.travelHoursBetween;
+      this._fieldOrder = m.FIELD_ORDER;
+      if (!this._unmounted) this.setState({ regions: m.REGIONS, fieldOrder: m.FIELD_ORDER });
+    });
+  }
+  componentWillUnmount() {
+    this._unmounted = true;
+  }
+
+  // 画面を切り替えたらスクロールを先頭へ戻す（開いた画面がトップから表示されるように）
+  resetScroll() {
+    const doScroll = () => { const el = document.getElementById('appScroll'); if (el) el.scrollTop = 0; };
+    requestAnimationFrame(doScroll);
+    setTimeout(doScroll, 50);
+  }
+  goTab(tab) { this.setState({ tab, screen: 'tabs' }); this.resetScroll(); }
+  openPlace(id, fieldId) { this.setState({ screen: 'place', activePlaceId: id, expandedCardId: fieldId || null, focusFieldId: fieldId || null }); this.resetScroll(); }
+  backFromPlace() { this.setState({ screen: 'tabs' }); this.resetScroll(); }
+  toggleCard(id) { this.setState((s) => ({ expandedCardId: s.expandedCardId === id ? null : id })); }
+  incNights() { this.setState((s) => ({ nights: Math.min(s.nights + 1, 30) })); }
+  decNights() { this.setState((s) => ({ nights: Math.max(s.nights - 1, 1) })); }
+  incPeople() { this.setState((s) => ({ people: Math.min(s.people + 1, 10) })); }
+  decPeople() { this.setState((s) => ({ people: Math.max(s.people - 1, 1) })); }
+  selectDestination(id) { this.setState({ destinationId: id }); this.openPlace(id); }
+  clearDestination() { this.setState({ destinationId: null }); }
+  selectBudget(id) { this.setState((s) => ({ budgetId: s.budgetId === id ? null : id })); }
+  moveInCategory(categoryId, index, dir) {
+    this.setState((s) => {
+      const catItems = s.itinerary.filter((i) => i.categoryId === categoryId);
+      const target = index + dir;
+      if (target < 0 || target >= catItems.length) return null;
+      [catItems[index], catItems[target]] = [catItems[target], catItems[index]];
+      const queue = [...catItems];
+      const itinerary = s.itinerary.map((i) => (i.categoryId === categoryId ? queue.shift() : i));
+      return { itinerary };
+    });
+  }
+  createCategory() {
+    this.setState((s) => {
+      if (s.categories.length >= 10) return null;
+      this._catSeq = (this._catSeq || 1) + 1;
+      return { categories: [...s.categories, { id: 'cat' + this._catSeq, name: '旅程' + (s.categories.length + 1) }] };
+    });
+  }
+  renameCategory(id, name) {
+    this.setState((s) => ({ categories: s.categories.map((c) => (c.id === id ? { ...c, name } : c)) }));
+  }
+  deleteCategory(id) {
+    this.setState((s) => {
+      const sortMethodByCat = { ...(s.sortMethodByCat || {}) };
+      delete sortMethodByCat[id];
+      return {
+        categories: s.categories.filter((c) => c.id !== id),
+        itinerary: s.itinerary.filter((i) => i.categoryId !== id),
+        sortMethodByCat,
+      };
+    });
+  }
+  travelHours(aId, bId) {
+    if (aId === bId || !this._travelHoursBetween) return 0;
+    const regions = this.state.regions;
+    const a = regions.find((r) => r.id === aId);
+    const b = regions.find((r) => r.id === bId);
+    return this._travelHoursBetween(a, b);
+  }
+  routeHours(ids) {
+    let total = 0;
+    for (let i = 0; i < ids.length - 1; i++) total += this.travelHours(ids[i], ids[i + 1]);
+    return total;
+  }
+  // 出発地を変えながら最近傍でつなぐ(地点数が増えても計算が破綻しない)
+  bestTravelOrder(itinerary) {
+    const ids = itinerary.map((i) => i.placeId);
+    if (ids.length < 3) return itinerary;
+    let best = ids, bestHours = this.routeHours(ids);
+    ids.forEach((startId) => {
+      const remaining = ids.filter((id) => id !== startId);
+      const route = [startId];
+      while (remaining.length) {
+        const last = route[route.length - 1];
+        let pick = 0;
+        let pickHours = this.travelHours(last, remaining[0]);
+        remaining.forEach((id, idx) => {
+          const h = this.travelHours(last, id);
+          if (h < pickHours) { pickHours = h; pick = idx; }
+        });
+        route.push(remaining.splice(pick, 1)[0]);
+      }
+      const total = this.routeHours(route);
+      if (total < bestHours) { bestHours = total; best = route; }
+    });
+    return best.map((id) => itinerary.find((i) => i.placeId === id));
+  }
+  // カテゴリー単位で並び替える
+  arrangeCategory(categoryId, method) {
+    this.setState((s) => {
+      let catItems = s.itinerary.filter((i) => i.categoryId === categoryId);
+      if (method === 'story') {
+        const rank = (id) => {
+          const r = s.regions.find((x) => x.id === id);
+          return r && r.storyRank ? r.storyRank : 3;
+        };
+        catItems = [...catItems].sort((a, b) => rank(a.placeId) - rank(b.placeId));
+      } else {
+        catItems = this.bestTravelOrder(catItems);
+      }
+      const queue = [...catItems];
+      const itinerary = s.itinerary.map((i) => (i.categoryId === categoryId ? queue.shift() : i));
+      const sortMethodByCat = { ...(s.sortMethodByCat || {}), [categoryId]: method };
+      return { itinerary, sortMethodByCat };
+    });
+  }
+  selectField(id) {
+    this.setState((s) => ({
+      selectedFieldIds: s.selectedFieldIds.includes(id)
+        ? s.selectedFieldIds.filter((x) => x !== id)
+        : [...s.selectedFieldIds, id],
+      suggestions: [],
+    }));
+  }
+  // 県×分野の安定した相性スコア(0〜1)。データに分野ごとの優劣が無いため、決定的な擬似スコアで変化を出す
+  hashScore(str) {
+    let h = 2166136261;
+    for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); }
+    return ((h >>> 0) % 1000) / 1000;
+  }
+  resetItinerary() { this.setState({ itinerary: [], categories: [{ id: 'cat1', name: '旅程1' }], sortMethodByCat: {} }); }
+  openTerm(part, e) {
+    // 単語が行の右寄りにあるときは、ふきだしを右端そろえにして画面外へはみ出さないようにする
+    let alignRight = false;
+    const el = e && e.currentTarget;
+    if (el && el.getBoundingClientRect) {
+      const word = el.getBoundingClientRect();
+      const card = el.closest('p');
+      const box = card ? card.getBoundingClientRect() : null;
+      if (box) alignRight = word.left - box.left > box.width - 200;
+    }
+    this.setState((s) => ({
+      activeTerm:
+        s.activeTerm && s.activeTerm.term === part.term
+          ? null
+          : { term: part.term, desc: part.desc, alignRight },
+    }));
+  }
+  closeTerm() { this.setState({ activeTerm: null }); }
+  toggleSaveInterests() {
+    this.setState((s) => {
+      const same =
+        s.selectedFieldIds.length === s.interests.length &&
+        s.selectedFieldIds.every((id) => s.interests.includes(id));
+      return { interests: same ? [] : [...s.selectedFieldIds] };
+    });
+  }
+  addPlaceToCategory(placeId, categoryId) {
+    this.setState((s) => {
+      if (s.itinerary.some((i) => i.placeId === placeId && i.categoryId === categoryId)) return null;
+      return { itinerary: [...s.itinerary, { placeId, categoryId, day: 1, highlights: [] }] };
+    });
+  }
+  removePlaceFromCategory(placeId, categoryId) {
+    this.setState((s) => ({
+      itinerary: s.itinerary.filter((i) => !(i.placeId === placeId && i.categoryId === categoryId)),
+    }));
+  }
+  // 旅先を何日目に置くか(泊数+1日の範囲でクランプ)
+  setItemDay(placeId, categoryId, day) {
+    this.setState((s) => {
+      const maxDay = s.nights + 1;
+      const d = Math.max(1, Math.min(day, maxDay));
+      return { itinerary: s.itinerary.map((i) => (i.placeId === placeId && i.categoryId === categoryId ? { ...i, day: d } : i)) };
+    });
+  }
+  // その旅先で味わう「見どころ(学問テーマ)」の選択を切り替える
+  toggleHighlight(placeId, categoryId, fieldId) {
+    this.setState((s) => ({
+      itinerary: s.itinerary.map((i) => {
+        if (i.placeId === placeId && i.categoryId === categoryId) {
+          const hs = i.highlights || [];
+          return { ...i, highlights: hs.includes(fieldId) ? hs.filter((x) => x !== fieldId) : [...hs, fieldId] };
+        }
+        return i;
+      }),
+    }));
+  }
+  // カテゴリーが無いときに、そのまま追加できるようにする
+  quickAdd(placeId) {
+    this.setState((s) => {
+      let categories = s.categories;
+      let catId;
+      if (!categories.length) {
+        this._catSeq = (this._catSeq || 1) + 1;
+        catId = 'cat' + this._catSeq;
+        categories = [{ id: catId, name: '旅程1' }];
+      } else {
+        catId = categories[0].id;
+      }
+      if (s.itinerary.some((i) => i.placeId === placeId && i.categoryId === catId)) return { categories };
+      return { categories, itinerary: [...s.itinerary, { placeId, categoryId: catId, day: 1, highlights: [] }] };
+    });
+  }
+
+  // 近い順に地点をつないでいく(クラスターづくり)
+  clusterFrom(seedId, poolIds, count) {
+    const chosen = [seedId];
+    const rem = poolIds.filter((id) => id !== seedId);
+    while (chosen.length < count && rem.length) {
+      const last = chosen[chosen.length - 1];
+      let bi = 0, bh = Infinity;
+      rem.forEach((id, i) => { const h = this.travelHours(last, id); if (h < bh) { bh = h; bi = i; } });
+      chosen.push(rem.splice(bi, 1)[0]);
+    }
+    return chosen;
+  }
+  // 出発地を変えつつ、合計移動が短くなる並びを選ぶ
+  orderByRoute(ids) {
+    if (ids.length < 3) return ids.slice();
+    let best = ids.slice(), bestH = this.routeHours(ids);
+    ids.forEach((start) => {
+      const rem = ids.filter((id) => id !== start);
+      const route = [start];
+      while (rem.length) {
+        const last = route[route.length - 1];
+        let bi = 0, bh = Infinity;
+        rem.forEach((id, i) => { const h = this.travelHours(last, id); if (h < bh) { bh = h; bi = i; } });
+        route.push(rem.splice(bi, 1)[0]);
+      }
+      const h = this.routeHours(route);
+      if (h < bestH) { bestH = h; best = route; }
+    });
+    return best;
+  }
+  // 興味・泊数から、3タイプのおすすめ旅程を組み立てる
+  generateSuggestions() {
+    const s = this.state;
+    const regions = s.regions;
+    if (!regions.length) return;
+    const fieldOrder = (this._fieldOrder || []).map((f) => f.id);
+    const interests = s.selectedFieldIds.length ? s.selectedFieldIds : fieldOrder;
+    const P = Math.max(2, Math.min(s.nights + 1, 5));
+    const allIds = regions.map((r) => r.id);
+    const rank = (id) => { const r = regions.find((x) => x.id === id); return r && r.storyRank ? r.storyRank : 3; };
+    // 選んだジャンルへの相性で県を評価する(ジャンルを変えると選ばれる県が変わる)
+    const aff = (id, fid) => this.hashScore(id + '|' + fid);
+    const relevance = (id) => interests.reduce((sum, fid) => sum + aff(id, fid), 0);
+    const bestFieldFor = (id) => interests.slice().sort((a, b) => aff(id, b) - aff(id, a))[0];
+    // 興味に合う県の候補プール(ここから3案を組み立てる)
+    const pool = [...allIds].sort((a, b) => relevance(b) - relevance(a)).slice(0, Math.max(P * 4, 16));
+
+    // 1) 近場でぎゅっと: 候補プールの中で合計移動が最小になるクラスター
+    let nearIds = pool.slice(0, P), nearH = Infinity;
+    pool.forEach((seed) => { const c = this.clusterFrom(seed, pool, P); const h = this.routeHours(c); if (h < nearH) { nearH = h; nearIds = c; } });
+    nearIds = this.orderByRoute(nearIds);
+
+    // 2) 王道をめぐる: 候補の中で物語性の高い土地(近場と重複しないよう除外)
+    const usedA = new Set(nearIds);
+    const royalIds = this.orderByRoute(pool.filter((id) => !usedA.has(id)).sort((a, b) => rank(a) - rank(b)).slice(0, P));
+
+    // 3) テーマ深掘り: 筆頭ジャンルへの相性が高い土地(1・2と重複しないよう除外)
+    const themeField = interests[0];
+    const themeLabel = (fieldOrder.length ? (this._fieldOrder.find((f) => f.id === themeField) || {}).label : '') || '学び';
+    const usedB = new Set([...nearIds, ...royalIds]);
+    const themeIds = this.orderByRoute([...allIds].filter((id) => !usedB.has(id)).sort((a, b) => aff(b, themeField) - aff(a, themeField)).slice(0, P));
+
+    const feat = (ids, mode) => ids.map((id) => ({ placeId: id, fieldId: mode === 'theme' ? themeField : bestFieldFor(id) }));
+    const mk = (type, title, note, ids, mode) => ({ type, title, note, places: feat(ids, mode), totalHours: Math.round(this.routeHours(ids) * 2) / 2 });
+
+    const suggestions = [
+      mk('near', '近場でぎゅっとめぐる旅', '移動が少なめ。はじめてでも動きやすい組み合わせ。', nearIds, 'mix'),
+      mk('royal', '王道をおさえる旅', '名の知れた土地を中心に、見どころをおさえる。', royalIds, 'mix'),
+      mk('theme', themeLabel + 'を深める旅', themeLabel + 'の学びを軸に、じっくりめぐる。', themeIds, 'theme'),
+    ];
+    this.setState({ suggestions });
+  }
+  // 選んだおすすめ旅程を「旅程」タブに取り込む
+  adoptSuggestion(idx) {
+    this.setState((s) => {
+      const sg = (s.suggestions || [])[idx];
+      if (!sg) return null;
+      const maxDays = s.nights + 1;
+      this._catSeq = (this._catSeq || 1) + 1;
+      const catId = 'plan' + this._catSeq;
+      const category = { id: catId, name: sg.title };
+      const items = sg.places.map((p, i) => ({ placeId: p.placeId, categoryId: catId, day: Math.min(i + 1, maxDays), highlights: p.fieldId ? [p.fieldId] : [] }));
+      const empty = s.itinerary.length === 0;
+      return {
+        categories: empty ? [category] : [...s.categories, category],
+        itinerary: empty ? items : [...s.itinerary, ...items],
+        tab: 'itinerary',
+        screen: 'tabs',
+      };
+    });
+  }
+
+  openChat() { this.setState((s) => ({ screen: 'chat', returnScreen: s.screen })); }
+  backFromChat() { this.setState((s) => ({ screen: s.returnScreen })); }
+  setChatInput(v) { this.setState({ chatInput: v }); }
+  handleChatKey(e) { if (e.key === 'Enter') this.sendChat(); }
+
+  sendChat() {
+    const text = (this.state.chatInput || '').trim();
+    if (!text || this.state.chatLoading) return;
+    const history = [...this.state.chatMessages, { role: 'user', content: text }];
+    this.setState({ chatMessages: history, chatInput: '', chatLoading: true });
+    const region = this.state.activePlaceId ? this.state.regions.find((r) => r.id === this.state.activePlaceId) : null;
+    const context = region ? `ユーザーは現在「${region.name}」のページを見ています。` : '';
+    const system = `あなたは旅行アプリ「旅ラボ」のAIアシスタントです。歴史・地質学・自然・食文化など学問的な視点から、旅先選びやその土地の背景知識について、やさしい丁寧語で2〜4文程度の簡潔な回答をしてください。絵文字は使いません。${context}`;
+    const messages = history.map((m) => ({ role: m.role, content: m.content }));
+    const finish = (content) => {
+      if (this._unmounted) return;
+      this.setState((s) => ({ chatMessages: [...s.chatMessages, { role: 'assistant', content }], chatLoading: false }));
+    };
+    if (window.claude && window.claude.complete) {
+      window.claude.complete({ messages, system }).then(
+        (reply) => finish(reply || 'うまく応答できませんでした。もう一度お試しください。'),
+        () => finish('うまく応答できませんでした。もう一度お試しください。')
+      );
+    } else {
+      finish('(この環境ではAI応答を呼び出せません)');
+    }
+  }
+
+  renderVals() {
+    const s = this.state;
+    const regions = s.regions;
+    const findRegion = (id) => regions.find((r) => r.id === id);
+    const activeRegion = s.activePlaceId ? findRegion(s.activePlaceId) : null;
+
+    const termInField = (f) =>
+      !!(s.activeTerm && (Array.isArray(f.detail) ? f.detail : []).some((p) => p && p.term === s.activeTerm.term));
+
+    const orderedActiveFields = activeRegion
+      ? (s.focusFieldId
+          ? [...activeRegion.fields.filter((f) => f.id === s.focusFieldId), ...activeRegion.fields.filter((f) => f.id !== s.focusFieldId)]
+          : activeRegion.fields)
+      : [];
+    const activeRegionFields = activeRegion
+      ? orderedActiveFields.map((f) => ({
+          ...f,
+          innerOverflow: f.id === s.expandedCardId && termInField(f) ? 'visible' : 'hidden',
+          isExpanded: f.id === s.expandedCardId,
+          rows: f.id === s.expandedCardId ? '1fr' : '0fr',
+          chevronRotate: f.id === s.expandedCardId ? 'rotate(180deg)' : 'rotate(0deg)',
+          onToggle: () => this.toggleCard(f.id),
+          segments: (Array.isArray(f.detail) ? f.detail : [f.detail]).map((p) =>
+            typeof p === 'string'
+              ? { text: p, desc: '', isActive: false, display: 'inline', tipLeft: '0', tipRight: 'auto', color: '#3A3327', underline: 'none', cursor: 'auto', weight: '400', onClick: () => {} }
+              : {
+                  text: p.term,
+                  desc: p.desc,
+                  isActive: !!(s.activeTerm && s.activeTerm.term === p.term),
+                  display: 'inline-block',
+                  tipLeft: s.activeTerm && s.activeTerm.alignRight ? 'auto' : '0',
+                  tipRight: s.activeTerm && s.activeTerm.alignRight ? '0' : 'auto',
+                  color: '#3E7391',
+                  underline: '1px dashed #6E9FB8',
+                  cursor: 'pointer',
+                  weight: '700',
+                  onClick: (e) => this.openTerm(p, e),
+                }
+          ),
+        }))
+      : [];
+
+    const FIELD_ORDER = s.fieldOrder || [];
+
+    const byReading = (a, b) => (a.reading || a.name || '').localeCompare(b.reading || b.name || '', 'ja');
+
+    const fieldChips = FIELD_ORDER.map((f) => ({
+      ...f,
+      chipBg: s.selectedFieldIds.includes(f.id) ? '#3A3327' : '#fff',
+      chipColor: s.selectedFieldIds.includes(f.id) ? '#fff' : '#3A3327',
+      onSelect: () => this.selectField(f.id),
+    }));
+
+    const discoverQ = (s.discoverQuery || '').trim();
+    const hasSelectedFieldNow = s.selectedFieldIds.length > 0;
+    const matchesDiscoverQ = (r) => !discoverQ || r.name.includes(discoverQ) || (r.reading || '').includes(discoverQ);
+    let discoverResults = [];
+    if (hasSelectedFieldNow || discoverQ) {
+      discoverResults = [...regions]
+        .sort(byReading)
+        .filter(matchesDiscoverQ)
+        .map((r) => {
+          const f = hasSelectedFieldNow ? r.fields.find((x) => s.selectedFieldIds.includes(x.id)) : null;
+          if (hasSelectedFieldNow && !f) return null;
+          return { region: r, hook: f ? f.hook : r.tagline, fieldLabel: f ? f.label : '', onOpen: () => this.openPlace(r.id, f ? f.id : null) };
+        })
+        .filter(Boolean);
+    }
+
+    const q = (s.destQuery || '').trim();
+    const matchedDestinations = [...regions]
+      .sort(byReading)
+      .filter((r) => !q || r.name.includes(q) || (r.reading || '').includes(q));
+    const DEST_LIMIT = 12;
+    const destinationChips = matchedDestinations
+      .slice(0, DEST_LIMIT)
+      .map((r) => ({ ...r, onSelect: () => this.selectDestination(r.id) }));
+    const moreDestinationCount = Math.max(0, matchedDestinations.length - DEST_LIMIT);
+
+    const BUDGET_TIERS = [
+      { id: 'low', label: '〜3万円' },
+      { id: 'mid', label: '3〜6万円' },
+      { id: 'high', label: '6万円〜' },
+    ];
+    const budgetChips = BUDGET_TIERS.map((b) => ({
+      ...b,
+      bg: s.budgetId === b.id ? '#3A3327' : '#fff',
+      color: s.budgetId === b.id ? '#fff' : '#3A3327',
+      borderColor: s.budgetId === b.id ? '#3A3327' : 'rgba(60,50,30,0.2)',
+      onSelect: () => this.selectBudget(b.id),
+    }));
+
+    const SORT_DEFS = [
+      { id: 'recommended', label: 'おすすめ順', caption: '移動のラクさと興味のバランスで並べます', tint: '#C85C3C', softBg: '#FCE9E3', labelColor: '#A84A2F', captionColor: '#8A6A5A' },
+      { id: 'travel', label: '移動がラクな順', caption: '移動時間の合計がいちばん短くなります', tint: '#E0A83C', softBg: '#FBF0D6', labelColor: '#8A6A1E', captionColor: '#9A8A5A' },
+      { id: 'story', label: '話がつながる順', caption: '土地の成り立ちが順に分かるように並べます', tint: '#6E9FB8', softBg: '#E4EEF4', labelColor: '#3E7391', captionColor: '#5A7A8A' },
+    ];
+    const catSortMap = s.sortMethodByCat || {};
+    const maxDays = s.nights + 1;
+    const categoriesView = s.categories.map((c) => {
+      const catRaw = s.itinerary.filter((i) => i.categoryId === c.id);
+      const enriched = catRaw
+        .map((item, gi) => {
+          const r = findRegion(item.placeId);
+          return r ? { item, r, gi } : null;
+        })
+        .filter(Boolean);
+      // 旅順(並び)から日程を決める。上下で並べ替えると日も変わる
+      enriched.forEach((e, k) => {
+        e.day = Math.min(k + 1, maxDays);
+        e.prevSameDay = k > 0 && enriched[k - 1].day === e.day ? enriched[k - 1] : null;
+      });
+
+      const buildItem = (entry) => {
+        const { item, r, gi } = entry;
+        const prev = entry.prevSameDay;
+        const hop = prev ? this.travelHours(prev.item.placeId, item.placeId) : 0;
+        const gid = (item.highlights || [])[0] || null;
+        const gf = gid ? r.fields.find((f) => f.id === gid) : null;
+        return {
+          id: r.id,
+          name: r.name,
+          tagline: r.tagline,
+          accent: r.accent,
+          isFirst: gi === 0,
+          isLast: gi === catRaw.length - 1,
+          upOpacity: gi === 0 ? 0.3 : 1,
+          downOpacity: gi === catRaw.length - 1 ? 0.3 : 1,
+          onMoveUp: () => this.moveInCategory(c.id, gi, -1),
+          onMoveDown: () => this.moveInCategory(c.id, gi, 1),
+          onOpen: () => this.openPlace(r.id, gid),
+          onRemove: () => this.removePlaceFromCategory(item.placeId, c.id),
+          hasHop: !!prev && hop > 0,
+          hopLabel: '↓ 移動 約' + hop + '時間',
+          hasGenre: !!gf,
+          noGenre: !gf,
+          genreLabel: gf ? gf.label : '',
+          genreHook: gf ? gf.hook : '',
+          genreColor: gf ? gf.color : '#8A8068',
+        };
+      };
+
+      const dayGroups = [];
+      for (let d = 1; d <= maxDays; d++) {
+        const dayEntries = enriched.filter((e) => e.day === d);
+        const items = dayEntries.map((e) => buildItem(e));
+        dayGroups.push({
+          label: d + '日目',
+          items,
+          hasDayItems: items.length > 0,
+          noDayItems: items.length === 0,
+          dayTravelHours: Math.round(this.routeHours(dayEntries.map((e) => e.item.placeId)) * 2) / 2,
+          hasDayTravel: items.length > 1,
+        });
+      }
+
+      const totalItems = enriched.length;
+      const method = catSortMap[c.id] || null;
+      return {
+        id: c.id,
+        nameValue: c.name,
+        onRename: (e) => this.renameCategory(c.id, e.target.value),
+        onDelete: () => this.deleteCategory(c.id),
+        dayGroups,
+        hasItems: totalItems > 0,
+        noItems: totalItems === 0,
+        count: totalItems + '件',
+        hasMultiple: totalItems > 1,
+        totalTravelHours: Math.round(this.routeHours(enriched.map((e) => e.item.placeId)) * 2) / 2,
+        sortOptions: SORT_DEFS.map((o) => {
+          const selected = method === o.id;
+          return {
+            ...o,
+            borderStyle: selected ? 'solid' : 'dashed',
+            borderColor: o.tint,
+            bg: selected ? o.softBg : '#fff',
+            checkBg: selected ? o.tint : 'rgba(60,50,30,0.12)',
+            checkMark: selected ? '✓' : '',
+            onSelect: () => this.arrangeCategory(c.id, o.id),
+          };
+        }),
+      };
+    });
+    const TYPE_META = {
+      near: { badge: '近場でぎゅっと', tagBg: '#EDF2E0', tagColor: '#4E6B36' },
+      royal: { badge: '王道をめぐる', tagBg: '#FBF0D6', tagColor: '#8A6A1E' },
+      theme: { badge: 'テーマ深掘り', tagBg: '#E4EEF4', tagColor: '#3E7391' },
+    };
+    const suggestionCards = (s.suggestions || []).map((sg, gi) => {
+      const meta = TYPE_META[sg.type] || TYPE_META.near;
+      return {
+        badge: meta.badge,
+        tagBg: meta.tagBg,
+        tagColor: meta.tagColor,
+        title: sg.title,
+        note: sg.note,
+        nightsLabel: s.nights + '泊' + (s.nights + 1) + '日 ・ ' + s.people + '人',
+        totalLabel: '移動 約' + sg.totalHours + '時間',
+        onAdopt: () => this.adoptSuggestion(gi),
+        places: sg.places.map((p, i) => {
+          const r = findRegion(p.placeId);
+          const f = r ? r.fields.find((x) => x.id === p.fieldId) : null;
+          return {
+            dayLabel: Math.min(i + 1, s.nights + 1) + '日目',
+            name: r ? r.name : '',
+            accent: r ? r.accent : '#CCC',
+            fieldLabel: f ? f.label : '',
+            hook: f ? f.hook : (r ? r.tagline : ''),
+          };
+        }),
+      };
+    });
+
+    const placeCategoryChips = activeRegion
+      ? s.categories.map((c) => {
+          const added = s.itinerary.some((i) => i.placeId === activeRegion.id && i.categoryId === c.id);
+          return {
+            id: c.id,
+            name: c.name,
+            mark: added ? '✓ ' : '＋ ',
+            chipBg: added ? '#6B8E4E' : '#fff',
+            chipColor: added ? '#fff' : '#3A3327',
+            chipBorder: added ? '#6B8E4E' : 'rgba(60,50,30,0.22)',
+            onToggle: added
+              ? () => this.removePlaceFromCategory(activeRegion.id, c.id)
+              : () => this.addPlaceToCategory(activeRegion.id, c.id),
+          };
+        })
+      : [];
+
+    const chatMessagesView = s.chatMessages.map((m) => ({
+      content: m.content,
+      justify: m.role === 'user' ? 'flex-end' : 'flex-start',
+      bg: m.role === 'user' ? '#C85C3C' : '#fff',
+      color: m.role === 'user' ? '#fff' : '#3A3327',
+    }));
+
+    const screen = s.screen;
+    const tab = s.tab;
+    const isSaved =
+      s.selectedFieldIds.length > 0 &&
+      s.selectedFieldIds.length === s.interests.length &&
+      s.selectedFieldIds.every((id) => s.interests.includes(id));
+
+    return {
+      screen,
+      isPlaceScreen: screen === 'place',
+      isTabsScreen: screen === 'tabs',
+      isChatScreen: screen === 'chat',
+      showChrome: screen !== 'chat',
+      isHomeTab: tab === 'home',
+      isDiscoverTab: tab === 'discover',
+      isItineraryTab: tab === 'itinerary',
+      nights: s.nights,
+      people: s.people,
+      tripDays: s.nights + 1,
+      generateSuggestions: () => this.generateSuggestions(),
+      suggestionCards,
+      hasSuggestions: (s.suggestions || []).length > 0,
+      noSuggestions: (s.suggestions || []).length === 0,
+      budgetSummary: (BUDGET_TIERS.find((b) => b.id === s.budgetId) || { label: 'えらんでいません' }).label,
+      incNights: () => this.incNights(),
+      decNights: () => this.decNights(),
+      incPeople: () => this.incPeople(),
+      decPeople: () => this.decPeople(),
+      destinationChips,
+      regionCount: regions.length,
+      destQuery: s.destQuery,
+      onDestQueryChange: (e) => this.setState({ destQuery: e.target.value }),
+      hasMoreDestinations: moreDestinationCount > 0,
+      noMoreDestinations: moreDestinationCount === 0,
+      moreDestinationCount,
+      savedInterestPicks: [...regions]
+        .sort(byReading)
+        .map((r) => {
+          const f = r.fields.find((x) => s.interests.includes(x.id));
+          return f
+            ? { name: r.name, accent: r.accent, hook: f.hook, fieldLabel: f.label, onOpen: () => this.openPlace(r.id) }
+            : null;
+        })
+        .filter(Boolean)
+        .slice(0, 4),
+      clearDestination: () => this.clearDestination(),
+      goHome: () => this.goTab('home'),
+      goDiscover: () => this.goTab('discover'),
+      goItinerary: () => this.goTab('itinerary'),
+      fieldChips,
+      hasSavedInterests: s.interests.length > 0,
+      savedInterestLabels: FIELD_ORDER.filter((f) => s.interests.includes(f.id)).map((f) => f.label).join('・'),
+      saveLabel: isSaved ? '★ いつもの関心として保存ずみ(解除する)' : '☆ この分野をいつもの関心として保存',
+      saveBg: isSaved ? '#F1F4E4' : '#fff',
+      saveColor: isSaved ? '#4E6B36' : '#8A8068',
+      saveBorderColor: isSaved ? '#6B8E4E' : 'rgba(60,50,30,0.2)',
+      toggleSaveInterests: () => this.toggleSaveInterests(),
+      discoverResults,
+      hasSelectedField: s.selectedFieldIds.length > 0,
+      discoverQuery: s.discoverQuery,
+      onDiscoverQueryChange: (e) => this.setState({ discoverQuery: e.target.value }),
+      showDiscoverResults: hasSelectedFieldNow || !!discoverQ,
+      noDiscoverInput: !hasSelectedFieldNow && !discoverQ,
+      hasNoDiscoverHits: (hasSelectedFieldNow || !!discoverQ) && discoverResults.length === 0,
+      activeRegion,
+      activeRegionFields,
+      noSelectedField: s.selectedFieldIds.length === 0,
+      backFromPlace: () => this.backFromPlace(),
+      placeCategoryChips,
+      hasCategories: s.categories.length > 0,
+      noCategories: s.categories.length === 0,
+      quickAddCurrent: activeRegion ? () => this.quickAdd(activeRegion.id) : () => {},
+      categoriesView,
+      canAddCategory: s.categories.length < 10,
+      atCategoryLimit: s.categories.length >= 10,
+      createCategory: () => this.createCategory(),
+      resetItinerary: () => this.resetItinerary(),
+      budgetChips,
+      homeColor: tab === 'home' && screen !== 'place' ? '#C85C3C' : '#B7AE9C',
+      discoverColor: tab === 'discover' && screen !== 'place' ? '#C85C3C' : '#B7AE9C',
+      itineraryColor: tab === 'itinerary' && screen !== 'place' ? '#C85C3C' : '#B7AE9C',
+      hasActiveTerm: !!s.activeTerm,
+      activeTermName: s.activeTerm ? s.activeTerm.term : '',
+      activeTermDesc: s.activeTerm ? s.activeTerm.desc : '',
+      closeTerm: () => this.closeTerm(),
+      openChat: () => this.openChat(),
+      backFromChat: () => this.backFromChat(),
+      chatMessagesView,
+      chatIsEmpty: s.chatMessages.length === 0,
+      chatLoading: s.chatLoading,
+      chatInputValue: s.chatInput,
+      handleChatInputChange: (e) => this.setChatInput(e.target.value),
+      handleChatKeyDown: (e) => this.handleChatKey(e),
+      sendChat: () => this.sendChat(),
+    };
+  }
+}
+</script>
+
+<!-- ===== オープニング アニメーション(実体は opening.html で再生) ===== -->
+<style>
+  #tl-splash {
+    position: fixed; inset: 0; z-index: 9999;
+    background: #F5EFE6;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+    transition: opacity 0.8s ease;
+    font-family: 'Yomogi', sans-serif;
+  }
+  #tl-splash.tl-hide { opacity: 0; pointer-events: none; }
+  #tl-splash .tl-stage {
+    position: relative;
+    height: 100vh; max-height: 100vh;
+    aspect-ratio: 941 / 1672; max-width: 100vw;
+    background: url('images/bg.png') center/cover no-repeat;
+    box-shadow: 0 20px 60px rgba(60,50,30,0.25);
+    overflow: hidden;
+  }
+  #tl-splash .tl-el { position: absolute; opacity: 0; will-change: transform, opacity; }
+  #tl-splash .tl-tower {
+    right: 0.5%; top: 9%; height: 27%; transform-origin: 50% 100%;
+    animation: tlTower 1.3s cubic-bezier(.22,.61,.36,1) 0.2s both;
+  }
+  #tl-splash .tl-crane {
+    left: 1%; top: 55%; width: 30%; transform-origin: 30% 60%;
+    animation: tlCrane 1.15s cubic-bezier(.22,.61,.36,1) 1.35s both;
+  }
+  #tl-splash .tl-dogu {
+    left: 61%; top: 51%; width: 33%; transform-origin: 50% 70%;
+    animation: tlDogu 0.75s cubic-bezier(.34,1.56,.64,1) 2.5s both;
+  }
+  #tl-splash .tl-logo {
+    left: 16%; top: 38%; width: 68%;
+    animation: tlLogo 1s ease-out 3.05s both;
+  }
+  #tl-splash .tl-logo .tl-word {
+    font-size: clamp(24px, 7vh, 44px); color: #6b4f2a; text-align: center;
+    letter-spacing: 0.06em; margin: 0; line-height: 1; white-space: nowrap;
+  }
+  #dc-root { transition: opacity 0.35s ease; }
+  body.tl-loading #dc-root { opacity: 0; }
+  #tl-splash .tl-logo svg { display: block; width: 100%; height: auto; margin-top: -4%; overflow: visible; }
+  #tl-splash .tl-skip {
+    position: absolute; right: 16px; bottom: 18px; z-index: 2;
+    background: rgba(255,255,255,0.7); color: #8A8068; border: none;
+    font-family: 'Zen Maru Gothic', sans-serif; font-size: 12px;
+    padding: 7px 14px; border-radius: 999px; cursor: pointer;
+  }
+  @keyframes tlTower { from { opacity: 0; transform: translateY(42%); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes tlCrane { from { opacity: 0; transform: translate(-75%, 78%) rotate(-8deg); } to { opacity: 1; transform: translate(0,0) rotate(0); } }
+  @keyframes tlDogu { 0% { opacity: 0; transform: scale(0.2); } 55% { opacity: 1; transform: scale(1.18); } 78% { transform: scale(0.94); } 100% { opacity: 1; transform: scale(1); } }
+  @keyframes tlLogo { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+
+<script>
+  (function () {
+    return; // オープニング演出は opening.html 側で再生するため、ここでは無効化
+    var MARKUP = ''
+      + '<div id="tl-splash"><div class="tl-stage">'
+      + '<img class="tl-el tl-tower" src="images/tower.png" alt="" onerror="this.style.display=\'none\'">'
+      + '<img class="tl-el tl-crane" src="images/crane.png" alt="" onerror="this.style.display=\'none\'">'
+      + '<img class="tl-el tl-dogu" src="images/dogu.png" alt="" onerror="this.style.display=\'none\'">'
+      + '<div class="tl-el tl-logo"><p class="tl-word">たびラボ</p>'
+      + '<svg viewBox="0 0 360 120">'
+      + '<clipPath id="tlClip"><rect x="-10" y="-10" height="140" width="0"><animate attributeName="width" from="0" to="380" dur="1.3s" begin="indefinite" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.4 0 0.2 1"/></rect></clipPath>'
+      + '<g clip-path="url(#tlClip)"><path d="M36,96 C110,124 200,124 250,96 C292,73 318,50 336,34" fill="none" stroke="#7a5b34" stroke-width="3.2" stroke-linecap="round" stroke-dasharray="0.5 11"/></g>'
+      + '<g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.01s" begin="indefinite" fill="freeze"/>'
+      + '<animateMotion dur="1.3s" begin="indefinite" fill="freeze" rotate="auto" calcMode="spline" keyTimes="0;1" keySplines="0.4 0 0.2 1" path="M36,96 C110,124 200,124 250,96 C292,73 318,50 336,34"/>'
+      + '<g transform="translate(-14,-9)"><path d="M0,9 L28,0 L20,10 L28,20 Z" fill="#6b4f2a"/><path d="M20,10 L28,0 L14,11 Z" fill="#8a744a"/></g>'
+      + '</g></svg></div>'
+      + '<button class="tl-skip">スキップ ›</button>'
+      + '</div></div>';
+
+    var ended = false, lastMount = 0, hold = /[?&]hold=1/.test(location.search);
+    function end() {
+      if (ended) return; ended = true;
+      var s = document.getElementById('tl-splash');
+      if (s) { s.classList.add('tl-hide'); setTimeout(function () { if (s.parentNode) s.parentNode.removeChild(s); }, 900); }
+    }
+    window.__tlEnd = end;
+    function triggerSVG() {
+      var sp = document.getElementById('tl-splash');
+      if (!sp) return;
+      var list = sp.querySelectorAll('svg animate, svg animateMotion');
+      for (var i = 0; i < list.length; i++) { try { list[i].beginElement(); } catch (e) {} }
+    }
+    function mount() {
+      if (ended || document.getElementById('tl-splash')) return;
+      // ランタイムはbody直下の余分な要素を毎フレーム削除するため、html直下に載せる
+      // (html直下は insertAdjacentHTML が使えないので appendChild で入れる)
+      var wrap = document.createElement('div');
+      wrap.innerHTML = MARKUP;
+      var node = wrap.firstElementChild;
+      if (!node) return;
+      try { document.documentElement.appendChild(node); } catch (e) { window.__tlErr = String(e); return; }
+      window.__tlMountCount = (window.__tlMountCount || 0) + 1;
+      lastMount = Date.now();
+      var sk = node.querySelector('.tl-skip');
+      if (sk) sk.addEventListener('click', end);
+      // SVGの線と飛行機は挿入時点を基準に開始する(文書タイムライン依存を避ける)
+      setTimeout(triggerSVG, 3350);
+    }
+    function boot() {
+      mount();
+      var iv = setInterval(function () {
+        window.__tlKeep = (window.__tlKeep || 0) + 1;
+        if (ended) { clearInterval(iv); return; }
+        if (!document.getElementById('tl-splash')) { window.__tlMissing = (window.__tlMissing || 0) + 1; mount(); }
+        if (!hold && lastMount && Date.now() - lastMount > 5400) end();
+      }, 200);
+      setTimeout(function () { if (!ended) end(); }, 15000); // 最終保険
+    }
+    var booted = false;
+    function start() { if (booted) return; booted = true; window.__tlBooted = true; boot(); }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
+    else start();
+    window.addEventListener('load', start);
+    setTimeout(start, 500);
+  })();
+</script>
+</body>
+</html>

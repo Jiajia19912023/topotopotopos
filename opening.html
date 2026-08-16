@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>たびラボ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Yomogi&family=Zen+Maru+Gothic:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; height: 100%; }
+  * { box-sizing: border-box; }
+  #tl-splash {
+    position: fixed; inset: 0; z-index: 10;
+    background: #F5EFE6;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+    transition: opacity 0.8s ease;
+    font-family: 'Yomogi', sans-serif;
+  }
+  #tl-splash.tl-hide { opacity: 0; pointer-events: none; }
+  #tl-splash .tl-stage {
+    position: relative;
+    height: 100vh; max-height: 100vh;
+    aspect-ratio: 941 / 1672; max-width: 100vw;
+    background: url('images/bg.png') center/cover no-repeat;
+    box-shadow: 0 20px 60px rgba(60,50,30,0.25);
+    overflow: hidden;
+  }
+  #tl-splash .tl-el { position: absolute; opacity: 0; will-change: transform, opacity; }
+  #tl-splash .tl-tower {
+    right: 3%; top: 16%; width: 16%; transform-origin: 50% 100%;
+    animation: tlTower 1.2s cubic-bezier(.22,.61,.36,1) 0.15s both;
+  }
+  #tl-splash .tl-crane {
+    left: 3%; top: 67%; width: 27%; transform-origin: 40% 55%;
+    animation: tlCrane 1.05s cubic-bezier(.22,.61,.36,1) 1.1s both;
+  }
+  #tl-splash .tl-dogu {
+    left: 72.5%; top: 53%; width: 23%; transform-origin: 50% 70%;
+    animation: tlDogu 0.75s cubic-bezier(.34,1.56,.64,1) 2.0s both;
+  }
+  #tl-splash .tl-logo {
+    left: 15.5%; top: 32%; width: 69%; transform-origin: 50% 50%;   /* 文字1.5倍(46%→69%) */
+    animation: tlLogoPop 1.4s cubic-bezier(.22,1,.36,1) 2.65s both;
+  }
+  #tl-splash .tl-logo-img {
+    display: block; width: 100%; height: auto;
+    transform: rotate(-6deg);          /* 右上にやや傾ける */
+    filter: drop-shadow(0 3px 8px rgba(60,50,30,0.18));
+  }
+  #tl-splash .tl-tap {
+    position: absolute; inset: 0; z-index: 5; cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  #tl-splash .tl-hint {
+    position: absolute; left: 0; right: 0; bottom: 5%; z-index: 6; text-align: center;
+    pointer-events: none; opacity: 0;
+    animation: tlHint 0.9s ease-out 4.6s forwards;
+  }
+  #tl-splash .tl-hint span {
+    display: inline-block; background: rgba(255,255,255,0.78); color: #6b4f2a;
+    font-family: 'Zen Maru Gothic', sans-serif; font-size: 13px; font-weight: 700;
+    padding: 8px 18px; border-radius: 999px; letter-spacing: 0.04em;
+    box-shadow: 0 4px 14px rgba(60,50,30,0.15);
+    animation: tlHintPulse 1.8s ease-in-out 5.5s infinite;
+  }
+  @keyframes tlHint { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes tlHintPulse { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+  @keyframes tlTower { from { opacity: 0; transform: translateY(42%); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes tlCrane { from { opacity: 0; transform: translate(-75%, 78%) rotate(-8deg); } to { opacity: 1; transform: translate(0,0) rotate(0); } }
+  @keyframes tlDogu { 0% { opacity: 0; transform: scale(0.2); } 55% { opacity: 1; transform: scale(1.18); } 78% { transform: scale(0.94); } 100% { opacity: 1; transform: scale(1); } }
+  @keyframes tlLogoPop {
+    0%   { opacity: 0; transform: scale(0.15); }
+    18%  { opacity: 1; }
+    55%  { opacity: 1; transform: scale(1.35); }   /* もっと大きく飛び出す */
+    75%  { transform: scale(0.92); }
+    90%  { transform: scale(1.04); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+</style>
+</head>
+<body>
+<div id="tl-splash">
+  <div class="tl-stage">
+    <img class="tl-el tl-tower" src="images/tower.png" alt="" onerror="this.style.display='none'">
+    <img class="tl-el tl-crane" src="images/crane.png" alt="" onerror="this.style.display='none'">
+    <img class="tl-el tl-dogu" src="images/dogu.png" alt="" onerror="this.style.display='none'">
+    <div class="tl-el tl-logo">
+      <img class="tl-logo-img" src="logo.png?v=4" alt="とぽとぽとぽす" onerror="this.style.display='none'">
+    </div>
+  </div>
+  <div class="tl-hint"><span>タップして はじめる</span></div>
+  <a class="tl-tap" id="tl-tap" href="旅ラボ プロトタイプ.dc.html" aria-label="はじめる"></a>
+</div>
+<script>
+  (function () {
+    // 画面タップで次の画面へ(自動遷移はなし)。実リンク<a>でもフォールバック動作する。
+    var APP = '旅ラボ プロトタイプ.dc.html';
+    var tap = document.getElementById('tl-tap');
+    if (tap) tap.addEventListener('click', function (e) {
+      e.preventDefault();
+      var s = document.getElementById('tl-splash');
+      if (s) s.classList.add('tl-hide');
+      setTimeout(function () { window.location.href = APP; }, 500);
+    });
+  })();
+</script>
+</body>
+</html>
