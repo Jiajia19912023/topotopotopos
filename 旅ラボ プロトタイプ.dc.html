@@ -387,6 +387,7 @@ class Component extends DCLogic {
   componentDidMount() {
     if (this._loadedData) return;
     this._loadedData = true;
+    this._loadSaved();                      // 同じデバイスの保存データを復元
     import('./trip-data.js?v=19').then((m) => {
       this._travelHoursBetween = m.travelHoursBetween;
       this._fieldOrder = m.FIELD_ORDER;
@@ -395,6 +396,51 @@ class Component extends DCLogic {
   }
   componentWillUnmount() {
     this._unmounted = true;
+  }
+  // ===== 記録を同じデバイスに保存(localStorage) =====
+  componentDidUpdate() {
+    if (!this._restoring) {
+      clearTimeout(this._persistTimer);
+      this._persistTimer = setTimeout(() => this._persist(), 120);
+    }
+  }
+  _persist() {
+    try {
+      const s = this.state || {};
+      localStorage.setItem('topotopo:v1', JSON.stringify({
+        v: 1,
+        itinerary: s.itinerary, categories: s.categories,
+        nights: s.nights, people: s.people,
+        selectedFieldIds: s.selectedFieldIds, sortMethodByCat: s.sortMethodByCat,
+        interests: s.interests,
+        itemSeq: this._itemSeq || 0, catSeq: this._catSeq || 0,
+      }));
+    } catch (e) {}
+  }
+  _loadSaved() {
+    try {
+      const raw = localStorage.getItem('topotopo:v1');
+      if (!raw) return;
+      const d = JSON.parse(raw) || {};
+      // uid採番カウンタを復元(重複防止)。保存が古くても既存uidの最大値から復元
+      const uidMax = (Array.isArray(d.itinerary) ? d.itinerary : []).reduce((mx, i) => {
+        const n = parseInt(String((i && i.uid) || '').replace(/^it/, ''), 10);
+        return isNaN(n) ? mx : Math.max(mx, n);
+      }, 0);
+      this._itemSeq = Math.max(d.itemSeq || 0, uidMax);
+      this._catSeq = d.catSeq || 0;
+      const patch = {};
+      if (Array.isArray(d.itinerary)) patch.itinerary = d.itinerary;
+      if (Array.isArray(d.categories) && d.categories.length) patch.categories = d.categories;
+      if (typeof d.nights === 'number') patch.nights = d.nights;
+      if (typeof d.people === 'number') patch.people = d.people;
+      if (Array.isArray(d.selectedFieldIds)) patch.selectedFieldIds = d.selectedFieldIds;
+      if (d.sortMethodByCat && typeof d.sortMethodByCat === 'object') patch.sortMethodByCat = d.sortMethodByCat;
+      if (Array.isArray(d.interests)) patch.interests = d.interests;
+      this._restoring = true;
+      this.setState(patch);
+      setTimeout(() => { this._restoring = false; }, 0);
+    } catch (e) {}
   }
 
   // 画面を切り替えたらスクロールを先頭へ戻す（開いた画面がトップから表示されるように）
