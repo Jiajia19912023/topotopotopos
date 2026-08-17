@@ -2,6 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
+<title>とぽとぽとぽす</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <script>
   // 読み込み/リフレッシュ時は必ずタイトル画面へ。
@@ -66,7 +67,7 @@
   <div class="chrome-desktop" style="position:absolute; top:40%; right:4%; width:90px; height:90px; background:#E9C2B8; border-radius:50%; opacity:0.55;"></div>
 
   <div class="chrome-desktop" style="text-align:center; position:relative; z-index:1;">
-    <p style="font-family:'Yomogi',sans-serif; font-size:34px; color:#C85C3C; margin:0;">旅ラボ</p>
+    <p style="font-family:'Yomogi',sans-serif; font-size:34px; color:#C85C3C; margin:0;">とぽとぽとぽす</p>
     <p style="font-size:13px; color:#8A8068; margin:4px 0 0; letter-spacing:0.04em;">学問でめぐる、日本の旅。— プロトタイプ</p>
   </div>
 
@@ -757,7 +758,7 @@ class Component extends DCLogic {
     this.setState({ chatMessages: history, chatInput: '', chatLoading: true });
     const region = this.state.activePlaceId ? this.state.regions.find((r) => r.id === this.state.activePlaceId) : null;
     const context = region ? `ユーザーは現在「${region.name}」のページを見ています。` : '';
-    const system = `あなたは旅行アプリ「旅ラボ」のAIアシスタントです。歴史・地質学・自然・食文化など学問的な視点から、旅先選びやその土地の背景知識について、やさしい丁寧語で2〜4文程度の簡潔な回答をしてください。絵文字は使いません。${context}`;
+    const system = `あなたは旅行アプリ「とぽとぽとぽす」のAIアシスタントです。歴史・地質学・自然・食文化など学問的な視点から、旅先選びやその土地の背景知識について、やさしい丁寧語で2〜4文程度の簡潔な回答をしてください。絵文字は使いません。${context}`;
     const messages = history.map((m) => ({ role: m.role, content: m.content }));
     const finish = (content) => {
       if (this._unmounted) return;
@@ -1170,7 +1171,7 @@ class Component extends DCLogic {
       + '<img class="tl-el tl-tower" src="images/tower.png" alt="" onerror="this.style.display=\'none\'">'
       + '<img class="tl-el tl-crane" src="images/crane.png" alt="" onerror="this.style.display=\'none\'">'
       + '<img class="tl-el tl-dogu" src="images/dogu.png" alt="" onerror="this.style.display=\'none\'">'
-      + '<div class="tl-el tl-logo"><p class="tl-word">たびラボ</p>'
+      + '<div class="tl-el tl-logo"><p class="tl-word">とぽとぽとぽす</p>'
       + '<svg viewBox="0 0 360 120">'
       + '<clipPath id="tlClip"><rect x="-10" y="-10" height="140" width="0"><animate attributeName="width" from="0" to="380" dur="1.3s" begin="indefinite" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.4 0 0.2 1"/></rect></clipPath>'
       + '<g clip-path="url(#tlClip)"><path d="M36,96 C110,124 200,124 250,96 C292,73 318,50 336,34" fill="none" stroke="#7a5b34" stroke-width="3.2" stroke-linecap="round" stroke-dasharray="0.5 11"/></g>'
