@@ -3,6 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>
+  // 読み込み/リフレッシュ時は必ずタイトル画面へ。
+  // opening.html で「はじめる」を押したときだけ(ttp_fromOpening=1)アプリを表示する。
+  (function () {
+    try {
+      if (sessionStorage.getItem('ttp_fromOpening') === '1') {
+        sessionStorage.removeItem('ttp_fromOpening'); // 一度だけ消費
+      } else {
+        location.replace('opening.html');
+      }
+    } catch (e) {}
+  })();
+</script>
 <script src="./support.js"></script>
 </head>
 <body>

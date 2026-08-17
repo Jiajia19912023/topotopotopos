@@ -102,6 +102,7 @@
     var tap = document.getElementById('tl-tap');
     if (tap) tap.addEventListener('click', function (e) {
       e.preventDefault();
+      try { sessionStorage.setItem('ttp_fromOpening', '1'); } catch (e2) {}  // アプリ側へ「タップして入った」印
       var s = document.getElementById('tl-splash');
       if (s) s.classList.add('tl-hide');
       setTimeout(function () { window.location.href = APP; }, 500);
